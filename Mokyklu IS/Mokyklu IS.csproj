@@ -14,10 +14,4 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Pages\Mokytojas\" />
-    <Folder Include="Pages\Mokinys\" />
-    <Folder Include="Pages\Tevai\" />
-  </ItemGroup>
-
 </Project>
