@@ -1,0 +1,48 @@
+﻿@page
+@model Mokyklu_IS.Pages.Admin.TvarkarastisModel
+@{
+    Layout = "/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<div class="text-center">
+    <form action="">
+        <div class="container">
+            <h1>Tvarkaraščio Kūrimas</h1>
+
+            <label for="pamoka"><b>Pamoka</b></label><br>
+            <select class="custom-select" style="width:200px;" name="pamoka" id="pamoka">
+                <option value="matematika">Matematika</option>
+                <option value="lietuviu">Lietuvių Kalba</option>
+                <option value="anglu">Anglų Kalba</option>
+                <option value="geografija">Geografija</option>
+            </select><br><br>
+
+            <label for="diena"><b>Savaitės Diena</b></label><br>
+            <select class="custom-select" style="width:200px;" name="diena" id="diena">
+                <option value="pirm">Pirmadinis</option>
+                <option value="antr">Antradienis</option>
+                <option value="tre">Trečiadienis</option>
+                <option value="ket">Ketvirtadienis</option>
+                <option value="pen">Penktadienis</option>
+            </select><br><br>
+
+            <label for="laikas"><b>Laikas:</b></label><br>
+            <select class="custom-select" style="width:200px;" name="laikas" id="laikas">
+                <option value="laikas1">8:00-8:45</option>
+                <option value="laikas2">8:55-9:40</option>
+                <option value="laikas3">9:50-10:35</option>
+                <option value="laikas4">11:00-11:45</option>
+                <option value="laikas5">12:10-12:55</option>
+                <option value="laikas6">13:05-13:50</option>
+                <option value="laikas7">14:00-14:45</option>
+            </select><br><br>
+
+            <label for="klase"><b>Klase:</b></label><br>
+            <select class="custom-select" style="width:200px;" name="klase" id="klase">
+                <option value="def">Klasė</option>
+            </select><br><br>
+
+            <button type="submit" class="registerbtn">Įrašyti</button>
+        </div>
+    </form>
+</div>

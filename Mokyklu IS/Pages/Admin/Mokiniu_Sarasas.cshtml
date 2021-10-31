@@ -1,0 +1,38 @@
+﻿@page
+@model Mokyklu_IS.Pages.Admin.Mokiniu_SarasasModel
+@{
+    Layout = "/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<div class="text-center">
+    <div class="container">
+        <h3 class="display-4">Mokytojai</h3>
+        <table id="customers">
+            <tr>
+                <th>Vardas</th>
+                <th>Pavarde</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>Vardenis</td>
+                <td>Pavardenis</td>
+                <td>
+                    <input type="checkbox" id="selec" name="selec">
+                </td>
+            </tr>
+            <tr>
+                <td>Vardenis2</td>
+                <td>Pavardenis2</td>
+                <td>
+                    <input type="checkbox" id="selec" name="selec">
+                </td>
+            </tr>
+        </table><br /><br />
+
+        <form style="display: inline" asp-area="" asp-page="/Admin/Mokiniu_Sarasas_Lentele" method="get">
+            <button type="submit" class="registerbtn">Rodyti Mokinius</button>
+        </form>
+    </div>
+
+</div>
+

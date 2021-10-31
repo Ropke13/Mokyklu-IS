@@ -1,0 +1,30 @@
+﻿@page
+@model Mokyklu_IS.Pages.Admin.Mokiniu_Sarasas_LenteleModel
+@{
+    Layout = "/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<div class="text-center">
+    <div class="container">
+        <h3 class="display-4">Pasirinkto Mokytojo Mokiniai</h3>
+        <table id="customers">
+            <tr>
+                <th>Vardas</th>
+                <th>Pavarde</th>
+            </tr>
+            <tr>
+                <td>Vardenis</td>
+                <td>Pavardenis</td>
+            </tr>
+            <tr>
+                <td>Vardenis2</td>
+                <td>Pavardenis2</td>
+            </tr>
+        </table><br /><br />
+
+        <form style="display: inline" asp-area="" asp-page="/Admin/Mokiniu_Sarasas" method="get">
+            <button type="submit" class="registerbtn">Grysti Atgal</button>
+        </form>
+    </div>
+
+</div>

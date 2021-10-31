@@ -1,0 +1,43 @@
+﻿@page
+@model Mokyklu_IS.Pages.Admin.PriskyrimasModel
+@{
+    Layout = "/Pages/Shared/_AdminLayout.cshtml";
+}
+
+<div class="text-center">
+    <div class="container">
+        <h3 class="display-4">Nepriskirti Mokiniai</h3>
+        <table id="customers">
+            <tr>
+                <th>Vardas</th>
+                <th>Pavardė</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>Vardenis</td>
+                <td>Pavardenis</td>
+                <td>
+                    <input type="checkbox" id="selec" name="selec">
+                </td>
+            </tr>
+        </table><br /><br />
+
+        <h3 class="display-4">Tevai</h3>
+        <table id="customers">
+            <tr>
+                <th>Vardas</th>
+                <th>Pavardė</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>Vardenis</td>
+                <td>Pavardenis</td>
+                <td>
+                    <input type="checkbox" id="selec" name="selec">
+                </td>
+            </tr>
+        </table><br /><br />
+
+        <button type="submit" class="registerbtn">Patvirtinti</button>
+    </div>
+</div>
