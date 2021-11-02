@@ -1,0 +1,35 @@
+﻿@page
+@model Mokyklu_IS.Pages.Tevai.ZinutesModel
+@{
+    Layout = "/Pages/Shared/_TevaiLayout.cshtml";
+}
+<div class="text-center">
+    <div style="text-align:left" class="container">
+        <label for="gavejas"><b>Gavejas</b></label><br>
+        <input type="text" placeholder="Iveskite Gaveja" name="gavejas" id="gavejas" required><br><br>
+
+        <label for="zinute"><b>Žinutė</b></label><br>
+        <textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>
+
+        <button type="submit" class="registerbtn">Siūsti Žinutę</button>
+    </div><br /><br />
+    <hr>
+
+    <div class="container">
+        <h3 class="display-4">Visos Žinutės</h3>
+        <table id="customers">
+            <tr>
+                <th>Nr</th>
+                <th>Siuntėjas</th>
+                <th>Data</th>
+                <th>Žinutė</th>
+            </tr>
+            <tr>
+                <td>1</td>
+                <td>Ryčka</td>
+                <td>2001-09-11</td>
+                <td>Siandien nebus pamoku</td>
+            </tr>
+        </table><br /><br />
+    </div>
+</div>
