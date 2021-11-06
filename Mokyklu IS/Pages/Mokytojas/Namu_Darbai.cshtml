@@ -1,0 +1,51 @@
+﻿@page
+@model Mokyklu_IS.Pages.Mokytojas.Namu_DarbaiModel
+@{
+    Layout = "/Pages/Shared/_MokytojasLayout.cshtml";
+}
+<div class="text-center">
+    <div class="container">
+        <h3 class="display-4">Namų Darbai</h3>
+        <table id="customers">
+            <tr>
+                <th>Tema</th>
+                <th>Užduotis</th>
+                <th>Data</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>Aukštesniųjų eilių diferencialinės lygtys</td>
+                <td>Išspresti visas lygtis is duoto lapo</td>
+                <td>2021-12-12</td>
+                <td>
+                    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Namu_Darbai_Edit" method="get">
+                        <button class="registerbtn">Redaguoti</button>
+                    </form>
+                </td>
+            </tr>
+            <tr>
+                <td>Kokia gyvenimo prasme ?</td>
+                <td>Parasyti savo nuomone</td>
+                <td>2021-12-14</td>
+                <td>
+                    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Namu_Darbai_Edit" method="get">
+                        <button class="registerbtn">Redaguoti</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div style="text-align:center" class="container">
+        <label for="tema"><b>Tema</b></label><br>
+        <input type="text" placeholder="tema" name="tema" id="tema" required><br><br>
+
+        <label for="uzduotis"><b>Uzduotis</b></label><br>
+        <input type="text" placeholder="uzduotis" name="uzduotis" id="uzduotis" required><br><br>
+
+        <label for="data"><b>Data</b></label><br>
+        <input type="text" placeholder="Data" name="data" id="data" required><br><br>
+
+        <button type="submit" class="registerbtn">Įrašyti Namų Darbus</button>
+    </div>
+</div>

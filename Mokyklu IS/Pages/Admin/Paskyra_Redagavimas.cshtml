@@ -1,0 +1,32 @@
+﻿@page
+@model Mokyklu_IS.Pages.Admin.Paskyra_RedagavimasModel
+@{
+    Layout = "/Pages/Shared/_AdminLayout.cshtml";
+}
+<div class="text-center">
+        <div class="container">
+            <h1>Paskyros Redagavimas</h1>
+            <hr>
+
+            <label for="vardas"><b>Vardas</b></label><br>
+            <input type="text" placeholder="Iveskite Vardą" name="vardas" id="vardas" required><br><br>
+
+            <label for="pavarde"><b>Pavardė</b></label><br>
+            <input type="text" placeholder="Iveskite Pavardę" name="pavarde" id="pavarde" required><br><br>
+
+            <label for="tel-nr"><b>Telefonas</b></label><br>
+            <input type="text" placeholder="Iveskite Tel Numerį" name="tel-nr" id="tel-nr" required><br><br>
+
+            <label for="asmens-kodas"><b>Asmens Kodas</b></label><br>
+            <input type="text" placeholder="Iveskite Asmanes Kodą" name="asmens_kodas" id="asmens_kodas" required><br><br>
+            <hr>
+
+            <form style="display: inline" asp-area="" asp-page="/Admin/PaskiruTvarkykle" method="get">
+                <button class="registerbtn">Redaguoti</button>
+            </form>
+
+            <form style="display: inline" asp-area="" asp-page="/Admin/PaskiruTvarkykle" method="get">
+                <button class="registerbtn">Grįšti Atgal</button>
+            </form>
+        </div>
+</div>

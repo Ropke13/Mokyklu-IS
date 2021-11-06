@@ -1,0 +1,32 @@
+﻿@page
+@model Mokyklu_IS.Pages.Mokytojas.KlaseModel
+@{
+    Layout = "/Pages/Shared/_MokytojasLayout.cshtml";
+}
+<div class="text-center">
+    <div class="container">
+        <h3 class="display-4">Mokiniai</h3>
+        <table id="customers">
+            <tr>
+                <th>Vardas</th>
+                <th>Pavardė</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>Vardenis</td>
+                <td>Pavardenis</td>
+                <td>
+                    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Mokinys" method="get">
+                        <button class="registerbtn">Rinktis</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <div class="container">
+        <form style="display: inline" asp-area="" asp-page="/Mokytojas/Namu_Darbai" method="get">
+            <button class="registerbtn">Namų Darbai</button>
+        </form>
+    </div>
+</div>
