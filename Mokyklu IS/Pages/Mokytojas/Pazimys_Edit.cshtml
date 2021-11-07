@@ -1,0 +1,20 @@
+﻿@page
+@model Mokyklu_IS.Pages.Mokytojas.Pazimys_EditModel
+@{
+    Layout = "/Pages/Shared/_MokytojasLayout.cshtml";
+}
+<div>
+    <div style="text-align:left" class="container">
+        <label for="ivertis"><b>Įvertinimas</b></label><br>
+        <input type="text" placeholder="" name="ivertis" id="ivertis" required><br><br>
+
+        <label for="uz_ka"><b>Už ka</b></label><br>
+        <input type="text" placeholder="" name="uz" id="uz" required><br><br>
+
+        <label for="koment"><b>Komentaras</b></label><br>
+        <input type="text" placeholder="" name="kom" id="kom"><br><br>
+
+        <button type="submit" class="registerbtn">Redaguoti</button>
+
+    </div>
+</div>

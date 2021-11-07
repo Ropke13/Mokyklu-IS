@@ -1,0 +1,44 @@
+﻿@page
+@model Mokyklu_IS.Pages.Mokytojas.PazimysModel
+@{
+    Layout = "/Pages/Shared/_MokytojasLayout.cshtml";
+}
+<div class="text-center">
+    <div class="container">
+        <h3 class="display-4">Mokinio Pažymiai</h3>
+        <table id="customers">
+            <tr>
+                <th>Įvertinimas</th>
+                <th>Už ka</th>
+                <th>Komentaras</th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Kontrolinis</td>
+                <td>Puikus darbas!</td>
+                <td>
+                    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Pazimys_Edit" method="get">
+                        <button class="button1">Redag</button>
+                    </form>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <hr>
+    <h3 class="display-4">Įrašyti naują pazymį</h3>
+
+    <div style="text-align:left" class="container">
+
+        <label for="ivertis"><b>Įvertinimas</b></label><br>
+        <input type="text" placeholder="" name="ivertis" id="ivertis" required><br><br>
+
+        <label for="uz_ka"><b>Už ka</b></label><br>
+        <input type="text" placeholder="" name="uz" id="uz" required><br><br>
+
+        <label for="koment"><b>Komentaras</b></label><br>
+        <input type="text" placeholder="" name="kom" id="kom"><br><br>
+
+        <button type="submit" class="registerbtn">Įrašyti Pažymi</button>
+    </div><br /><br />
+</div>

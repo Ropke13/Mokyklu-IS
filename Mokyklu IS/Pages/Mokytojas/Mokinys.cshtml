@@ -1,4 +1,20 @@
 ﻿@page
 @model Mokyklu_IS.Pages.Mokytojas.MokinysModel
 @{
+    Layout = "/Pages/Shared/_MokytojasLayout.cshtml";
 }
+<div class="text-center">
+    <div class="container">
+    <h1 class="display-4">Mokinys</h1>
+
+    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Pazimys" method="get">
+        <button class="registerbtn">Pažymiai</button>
+    </form>
+
+    <br><br>
+
+    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Pastabos" method="get"> 
+        <button class="registerbtn">Pastabos</button>
+    </form>
+    </div>
+</div>
