@@ -6,20 +6,32 @@
 <div class="text-center">
     <div class="container">
         <h3 class="display-4">Klasės</h3>
-        <table id="customers">
-            <tr>
-                <th>Klasė</th>
-                <th></th>
-            </tr>
-            <tr>
-                <td>5B</td>
-                <td>
-                    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Klase" method="get">
-                        <button class="registerbtn">Rinktis</button>
-                    </form>
-                </td>
-            </tr>
-        </table>
+            @if (Model.Klase.Count() > 0)
+            {
+            <table id="customers">
+                <tr>
+                    <th>Klasė</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.Klase)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(m => item.Pavadinimas)
+                        </td>
+                        <td>
+                            <form style="display: inline" asp-area="" asp-page="/Mokytojas/Klase" method="get">
+                                <button class="registerbtn">Rinktis</button>
+                            </form>
+                        </td>
+                    </tr>
+                }
+            </table>
+            }
+            else
+            {
+                <p>Duomenu bazeje nera jokiu klasiu</p>
+            }
     </div>
 </div>
 

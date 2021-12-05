@@ -6,12 +6,38 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.20" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.20">
+    <Compile Remove="Migrations\20211205181426_AddSusirinkimas2ToDb.cs" />
+    <Compile Remove="Migrations\20211205181426_AddSusirinkimas2ToDb.Designer.cs" />
+    <Compile Remove="Migrations\20211205194950_MoreTables.cs" />
+    <Compile Remove="Migrations\20211205194950_MoreTables.Designer.cs" />
+    <Compile Remove="Migrations\20211205195855_MoreTables.cs" />
+    <Compile Remove="Migrations\20211205195855_MoreTables.Designer.cs" />
+    <Compile Remove="Migrations\20211205200214_MoreTables.cs" />
+    <Compile Remove="Migrations\20211205200214_MoreTables.Designer.cs" />
+    <Compile Remove="Migrations\20211205200722_MoreTables.cs" />
+    <Compile Remove="Migrations\20211205200722_MoreTables.Designer.cs" />
+    <Compile Remove="Migrations\20211205200828_MoreTables.cs" />
+    <Compile Remove="Migrations\20211205200828_MoreTables.Designer.cs" />
+    <Compile Remove="Migrations\20211205201030_MoreTables.cs" />
+    <Compile Remove="Migrations\20211205201030_MoreTables.Designer.cs" />
+    <Compile Remove="Migrations\20211205202013_MoreTables.cs" />
+    <Compile Remove="Migrations\20211205202013_MoreTables.Designer.cs" />
+    <Compile Remove="Migrations\20211205202947_ZinutesLentele.cs" />
+    <Compile Remove="Migrations\20211205202947_ZinutesLentele.Designer.cs" />
+    <Compile Remove="Migrations\20211205204559_PastabaUpdateLentele.cs" />
+    <Compile Remove="Migrations\20211205204559_PastabaUpdateLentele.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.5" />
+    <PackageReference Include="MySql.Data" Version="8.0.27" />
   </ItemGroup>
 
 </Project>
