@@ -6,6 +6,8 @@
 <div class="text-center">
     <div class="container">
         <h3 class="display-4">Kontaktai</h3>
+        @if (Model.Registracija.Count() > 0)
+        {
         <table id="customers">
             <tr>
                 <th>Vardas</th>
@@ -13,13 +15,21 @@
                 <th>Tipas</th>
                 <th>Telefono-Nr</th>
             </tr>
+            @foreach (var item in Model.Registracija)
+            {
             <tr>
-                <td>Vardenis</td>
-                <td>Pavardenis</td>
-                <td>Mokinys</td>
-                <td>86-42069</td>
+                <td>@Html.DisplayFor(m => item.Vardas)</td>
+                <td>@Html.DisplayFor(m => item.Pavarde)</td>
+                <td>@Html.DisplayFor(m => item.Role)</td>
+                <td>@Html.DisplayFor(m => item.Telefono_nr)</td>
             </tr>
+            }
         </table>
+        }
+            else
+            {
+                <p>Nerasta jokiu kontaktu</p>
+            }
     </div>
 </div>
 

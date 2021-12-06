@@ -7,32 +7,30 @@
 <div class="text-center">
     <div class="container">
         <h3 class="display-4">Mokytojai</h3>
+        @if (Model.Mokytojas.Count() > 0)
+        {
         <table id="customers">
             <tr>
                 <th>Vardas</th>
                 <th>Pavardė</th>
                 <th></th>
             </tr>
+            @foreach(var item in Model.Mokytojas)
+            {
             <tr>
-                <td>Vardenis</td>
-                <td>Pavardenis</td>
+                <td>@Html.DisplayFor(m => item.Vardas)</td>
+                <td>@Html.DisplayFor(m => item.Pavarde)</td>
                 <td>
-                    <input type="checkbox" id="selec" name="selec">
+                    <a asp-page="/Admin/Mokiniu_Sarasas_Lentele" asp-route-ID="@item.Id_Mokytojas" class="btn btn-primary m-1">Rodyti Mokinius</a>
                 </td>
             </tr>
-            <tr>
-                <td>Vardenis2</td>
-                <td>Pavardenis2</td>
-                <td>
-                    <input type="checkbox" id="selec" name="selec">
-                </td>
-            </tr>
-        </table><br /><br />
-
-        <form style="display: inline" asp-area="" asp-page="/Admin/Mokiniu_Sarasas_Lentele" method="get">
-            <button type="submit" class="registerbtn">Rodyti Mokinius</button>
-        </form>
+            }
+        </table>
+        }
+        else
+        {
+            <p>Nera Registruotu mokytoju duomenu bazeje</p>
+        }
     </div>
-
 </div>
 

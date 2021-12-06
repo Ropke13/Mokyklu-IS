@@ -10,6 +10,8 @@ namespace Mokyklu_IS.Model
     public class Tevas
     {
         [Key]
+        public int Id_Tevas { get; set; }
+        [Required]
         public string Asmens_kodas { get; set; }
         [Required]
         public string Vardas { get; set; }

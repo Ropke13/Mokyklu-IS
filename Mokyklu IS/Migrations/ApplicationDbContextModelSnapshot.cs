@@ -64,8 +64,8 @@ namespace Mokyklu_IS.Migrations
                     b.Property<int>("fk_Klase")
                         .HasColumnType("int");
 
-                    b.Property<string>("fk_Mokytojas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("fk_Mokytojas")
+                        .HasColumnType("int");
 
                     b.Property<string>("laikas")
                         .IsRequired()
@@ -104,8 +104,8 @@ namespace Mokyklu_IS.Migrations
                     b.Property<int?>("fk_Klase")
                         .HasColumnType("int");
 
-                    b.Property<string>("fk_Mokytojas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("fk_Mokytojas")
+                        .HasColumnType("int");
 
                     b.HasIndex("fk_Klase");
 
@@ -135,8 +135,14 @@ namespace Mokyklu_IS.Migrations
 
             modelBuilder.Entity("Mokyklu_IS.Model.Mokinys", b =>
                 {
+                    b.Property<int>("Id_Mokinys")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("Asmens_kodas")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Dalyku_sk")
                         .HasColumnType("int");
@@ -165,10 +171,10 @@ namespace Mokyklu_IS.Migrations
                     b.Property<int>("fk_Registracija")
                         .HasColumnType("int");
 
-                    b.Property<string>("fk_Tevas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("fk_Tevas")
+                        .HasColumnType("int");
 
-                    b.HasKey("Asmens_kodas");
+                    b.HasKey("Id_Mokinys");
 
                     b.HasIndex("fk_Klase");
 
@@ -181,11 +187,17 @@ namespace Mokyklu_IS.Migrations
 
             modelBuilder.Entity("Mokyklu_IS.Model.Mokytojas", b =>
                 {
-                    b.Property<string>("Asmens_kodas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id_Mokytojas")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool?>("Ar_pilnu_etatu")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Asmens_kodas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Pamoku_sk")
                         .HasColumnType("int");
@@ -208,7 +220,7 @@ namespace Mokyklu_IS.Migrations
                     b.Property<int>("fk_Registracija")
                         .HasColumnType("int");
 
-                    b.HasKey("Asmens_kodas");
+                    b.HasKey("Id_Mokytojas");
 
                     b.HasIndex("fk_Dalykas");
 
@@ -238,8 +250,8 @@ namespace Mokyklu_IS.Migrations
                     b.Property<int>("fk_Klase")
                         .HasColumnType("int");
 
-                    b.Property<string>("fk_Mokytojas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("fk_Mokytojas")
+                        .HasColumnType("int");
 
                     b.HasKey("Id_Namu_darbas");
 
@@ -267,8 +279,8 @@ namespace Mokyklu_IS.Migrations
                     b.Property<int>("fk_Klase")
                         .HasColumnType("int");
 
-                    b.Property<string>("fk_Mokytojas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("fk_Mokytojas")
+                        .HasColumnType("int");
 
                     b.Property<string>("laikas")
                         .IsRequired()
@@ -297,11 +309,11 @@ namespace Mokyklu_IS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("fk_Mokinys")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("fk_Mokinys")
+                        .HasColumnType("int");
 
-                    b.Property<string>("fk_Mokytojas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("fk_Mokytojas")
+                        .HasColumnType("int");
 
                     b.HasKey("Id_Pastaba");
 
@@ -331,11 +343,11 @@ namespace Mokyklu_IS.Migrations
                     b.Property<int?>("fk_Atsiskaitymas")
                         .HasColumnType("int");
 
-                    b.Property<string>("fk_Mokinys")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("fk_Mokinys")
+                        .HasColumnType("int");
 
-                    b.Property<string>("fk_Mokytojas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("fk_Mokytojas")
+                        .HasColumnType("int");
 
                     b.HasKey("Id_Pazimys");
 
@@ -420,8 +432,14 @@ namespace Mokyklu_IS.Migrations
 
             modelBuilder.Entity("Mokyklu_IS.Model.Tevas", b =>
                 {
+                    b.Property<int>("Id_Tevas")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("Asmens_kodas")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Pavarde")
                         .IsRequired()
@@ -444,7 +462,7 @@ namespace Mokyklu_IS.Migrations
                     b.Property<int?>("fk_Susirinkimas")
                         .HasColumnType("int");
 
-                    b.HasKey("Asmens_kodas");
+                    b.HasKey("Id_Tevas");
 
                     b.HasIndex("fk_Registracija");
 
@@ -495,11 +513,11 @@ namespace Mokyklu_IS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("fk_Mokytojas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("fk_Mokytojas")
+                        .HasColumnType("int");
 
-                    b.Property<string>("fk_Tevas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("fk_Tevas")
+                        .HasColumnType("int");
 
                     b.HasKey("Id_Zinutes");
 
@@ -529,7 +547,9 @@ namespace Mokyklu_IS.Migrations
 
                     b.HasOne("Mokyklu_IS.Model.Mokytojas", "Mokytojas")
                         .WithMany()
-                        .HasForeignKey("fk_Mokytojas");
+                        .HasForeignKey("fk_Mokytojas")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Mokyklu_IS.Model.Destymas", b =>
@@ -540,7 +560,9 @@ namespace Mokyklu_IS.Migrations
 
                     b.HasOne("Mokyklu_IS.Model.Mokytojas", "Mokytojas")
                         .WithMany()
-                        .HasForeignKey("fk_Mokytojas");
+                        .HasForeignKey("fk_Mokytojas")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Mokyklu_IS.Model.Mokinys", b =>
@@ -583,7 +605,9 @@ namespace Mokyklu_IS.Migrations
 
                     b.HasOne("Mokyklu_IS.Model.Mokytojas", "Mokytojas")
                         .WithMany()
-                        .HasForeignKey("fk_Mokytojas");
+                        .HasForeignKey("fk_Mokytojas")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Mokyklu_IS.Model.Pamoka", b =>
@@ -596,7 +620,9 @@ namespace Mokyklu_IS.Migrations
 
                     b.HasOne("Mokyklu_IS.Model.Mokytojas", "Mokytojas")
                         .WithMany()
-                        .HasForeignKey("fk_Mokytojas");
+                        .HasForeignKey("fk_Mokytojas")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("Mokyklu_IS.Model.Pastaba", b =>

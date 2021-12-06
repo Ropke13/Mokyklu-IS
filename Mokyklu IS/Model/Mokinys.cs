@@ -10,6 +10,9 @@ namespace Mokyklu_IS.Model
     public class Mokinys
     {
         [Key]
+        public int Id_Mokinys { get; set; }
+
+        [Required]
         public string Asmens_kodas { get; set; }
         [Required]
         public string Vardas { get; set; }
@@ -23,7 +26,7 @@ namespace Mokyklu_IS.Model
 
         [ForeignKey("fk_Tevas")]
         public Tevas Tevas { get; set; }
-        public string fk_Tevas { get; set; }
+        public int? fk_Tevas { get; set; }
 
         [ForeignKey("fk_Klase")]
         public Klase Klase { get; set; }

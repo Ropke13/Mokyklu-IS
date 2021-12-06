@@ -10,8 +10,8 @@ using Mokyklu_IS.Model;
 namespace Mokyklu_IS.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211205204303_PastabaLentele")]
-    partial class PastabaLentele
+    [Migration("20211206010314_fixedsomestuff")]
+    partial class fixedsomestuff
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -50,6 +50,38 @@ namespace Mokyklu_IS.Migrations
                     b.ToTable("Administratorius");
                 });
 
+            modelBuilder.Entity("Mokyklu_IS.Model.Atsiskaitymas", b =>
+                {
+                    b.Property<int>("Id_Atsiskaitymas")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Tema")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("fk_Klase")
+                        .HasColumnType("int");
+
+                    b.Property<int>("fk_Mokytojas")
+                        .HasColumnType("int");
+
+                    b.Property<string>("laikas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id_Atsiskaitymas");
+
+                    b.HasIndex("fk_Klase");
+
+                    b.HasIndex("fk_Mokytojas");
+
+                    b.ToTable("Atsiskaitymas");
+                });
+
             modelBuilder.Entity("Mokyklu_IS.Model.Dalykas", b =>
                 {
                     b.Property<int>("Id_Dalykas")
@@ -67,6 +99,21 @@ namespace Mokyklu_IS.Migrations
                     b.HasKey("Id_Dalykas");
 
                     b.ToTable("Dalykas");
+                });
+
+            modelBuilder.Entity("Mokyklu_IS.Model.Destymas", b =>
+                {
+                    b.Property<int?>("fk_Klase")
+                        .HasColumnType("int");
+
+                    b.Property<int>("fk_Mokytojas")
+                        .HasColumnType("int");
+
+                    b.HasIndex("fk_Klase");
+
+                    b.HasIndex("fk_Mokytojas");
+
+                    b.ToTable("Destymas");
                 });
 
             modelBuilder.Entity("Mokyklu_IS.Model.Klase", b =>
@@ -90,8 +137,14 @@ namespace Mokyklu_IS.Migrations
 
             modelBuilder.Entity("Mokyklu_IS.Model.Mokinys", b =>
                 {
+                    b.Property<int>("Id_Mokinys")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("Asmens_kodas")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Dalyku_sk")
                         .HasColumnType("int");
@@ -120,10 +173,10 @@ namespace Mokyklu_IS.Migrations
                     b.Property<int>("fk_Registracija")
                         .HasColumnType("int");
 
-                    b.Property<string>("fk_Tevas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("fk_Tevas")
+                        .HasColumnType("int");
 
-                    b.HasKey("Asmens_kodas");
+                    b.HasKey("Id_Mokinys");
 
                     b.HasIndex("fk_Klase");
 
@@ -136,11 +189,17 @@ namespace Mokyklu_IS.Migrations
 
             modelBuilder.Entity("Mokyklu_IS.Model.Mokytojas", b =>
                 {
-                    b.Property<string>("Asmens_kodas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id_Mokytojas")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<bool?>("Ar_pilnu_etatu")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Asmens_kodas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("Pamoku_sk")
                         .HasColumnType("int");
@@ -163,13 +222,79 @@ namespace Mokyklu_IS.Migrations
                     b.Property<int>("fk_Registracija")
                         .HasColumnType("int");
 
-                    b.HasKey("Asmens_kodas");
+                    b.HasKey("Id_Mokytojas");
 
                     b.HasIndex("fk_Dalykas");
 
                     b.HasIndex("fk_Registracija");
 
                     b.ToTable("Mokytojas");
+                });
+
+            modelBuilder.Entity("Mokyklu_IS.Model.Namu_Darbas", b =>
+                {
+                    b.Property<int>("Id_Namu_darbas")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Tema")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Uzduotis")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("fk_Klase")
+                        .HasColumnType("int");
+
+                    b.Property<int>("fk_Mokytojas")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_Namu_darbas");
+
+                    b.HasIndex("fk_Klase");
+
+                    b.HasIndex("fk_Mokytojas");
+
+                    b.ToTable("Namu_Darbas");
+                });
+
+            modelBuilder.Entity("Mokyklu_IS.Model.Pamoka", b =>
+                {
+                    b.Property<int>("Id_Pamoka")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Tema")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("fk_Klase")
+                        .HasColumnType("int");
+
+                    b.Property<int>("fk_Mokytojas")
+                        .HasColumnType("int");
+
+                    b.Property<string>("laikas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id_Pamoka");
+
+                    b.HasIndex("fk_Klase");
+
+                    b.HasIndex("fk_Mokytojas");
+
+                    b.ToTable("Pamoka");
                 });
 
             modelBuilder.Entity("Mokyklu_IS.Model.Pastaba", b =>
@@ -186,11 +311,11 @@ namespace Mokyklu_IS.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("fk_Mokinys")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("fk_Mokinys")
+                        .HasColumnType("int");
 
-                    b.Property<string>("fk_Mokytojas")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int?>("fk_Mokytojas")
+                        .HasColumnType("int");
 
                     b.HasKey("Id_Pastaba");
 
@@ -199,6 +324,42 @@ namespace Mokyklu_IS.Migrations
                     b.HasIndex("fk_Mokytojas");
 
                     b.ToTable("Pastaba");
+                });
+
+            modelBuilder.Entity("Mokyklu_IS.Model.Pazimys", b =>
+                {
+                    b.Property<int>("Id_Pazimys")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("Ivertis")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Komentaras")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Vertinimo_priezastis")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("fk_Atsiskaitymas")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("fk_Mokinys")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("fk_Mokytojas")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_Pazimys");
+
+                    b.HasIndex("fk_Atsiskaitymas");
+
+                    b.HasIndex("fk_Mokinys");
+
+                    b.HasIndex("fk_Mokytojas");
+
+                    b.ToTable("Pazimys");
                 });
 
             modelBuilder.Entity("Mokyklu_IS.Model.Registracija", b =>
@@ -273,8 +434,14 @@ namespace Mokyklu_IS.Migrations
 
             modelBuilder.Entity("Mokyklu_IS.Model.Tevas", b =>
                 {
+                    b.Property<int>("Id_Tevas")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
                     b.Property<string>("Asmens_kodas")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Pavarde")
                         .IsRequired()
@@ -297,7 +464,7 @@ namespace Mokyklu_IS.Migrations
                     b.Property<int?>("fk_Susirinkimas")
                         .HasColumnType("int");
 
-                    b.HasKey("Asmens_kodas");
+                    b.HasKey("Id_Tevas");
 
                     b.HasIndex("fk_Registracija");
 
@@ -306,11 +473,96 @@ namespace Mokyklu_IS.Migrations
                     b.ToTable("Tevas");
                 });
 
+            modelBuilder.Entity("Mokyklu_IS.Model.Tvarkarastis", b =>
+                {
+                    b.Property<int>("Id_Tvarkarastis")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Klase")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Laikas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pamoka")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sav_Diena")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id_Tvarkarastis");
+
+                    b.ToTable("Tvarkarastis");
+                });
+
+            modelBuilder.Entity("Mokyklu_IS.Model.Zinutes", b =>
+                {
+                    b.Property<int>("Id_Zinutes")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("Data")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Tekstas")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("fk_Mokytojas")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("fk_Tevas")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id_Zinutes");
+
+                    b.HasIndex("fk_Mokytojas");
+
+                    b.HasIndex("fk_Tevas");
+
+                    b.ToTable("Zinutes");
+                });
+
             modelBuilder.Entity("Mokyklu_IS.Model.Administratorius", b =>
                 {
                     b.HasOne("Mokyklu_IS.Model.Registracija", "Registracija")
                         .WithMany()
                         .HasForeignKey("fk_Registracija")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Mokyklu_IS.Model.Atsiskaitymas", b =>
+                {
+                    b.HasOne("Mokyklu_IS.Model.Klase", "Klase")
+                        .WithMany()
+                        .HasForeignKey("fk_Klase")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Mokyklu_IS.Model.Mokytojas", "Mokytojas")
+                        .WithMany()
+                        .HasForeignKey("fk_Mokytojas")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Mokyklu_IS.Model.Destymas", b =>
+                {
+                    b.HasOne("Mokyklu_IS.Model.Klase", "Klase")
+                        .WithMany()
+                        .HasForeignKey("fk_Klase");
+
+                    b.HasOne("Mokyklu_IS.Model.Mokytojas", "Mokytojas")
+                        .WithMany()
+                        .HasForeignKey("fk_Mokytojas")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -345,8 +597,53 @@ namespace Mokyklu_IS.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Mokyklu_IS.Model.Namu_Darbas", b =>
+                {
+                    b.HasOne("Mokyklu_IS.Model.Klase", "Klase")
+                        .WithMany()
+                        .HasForeignKey("fk_Klase")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Mokyklu_IS.Model.Mokytojas", "Mokytojas")
+                        .WithMany()
+                        .HasForeignKey("fk_Mokytojas")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("Mokyklu_IS.Model.Pamoka", b =>
+                {
+                    b.HasOne("Mokyklu_IS.Model.Klase", "Klase")
+                        .WithMany()
+                        .HasForeignKey("fk_Klase")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Mokyklu_IS.Model.Mokytojas", "Mokytojas")
+                        .WithMany()
+                        .HasForeignKey("fk_Mokytojas")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Mokyklu_IS.Model.Pastaba", b =>
                 {
+                    b.HasOne("Mokyklu_IS.Model.Mokinys", "Mokinys")
+                        .WithMany()
+                        .HasForeignKey("fk_Mokinys");
+
+                    b.HasOne("Mokyklu_IS.Model.Mokytojas", "Mokytojas")
+                        .WithMany()
+                        .HasForeignKey("fk_Mokytojas");
+                });
+
+            modelBuilder.Entity("Mokyklu_IS.Model.Pazimys", b =>
+                {
+                    b.HasOne("Mokyklu_IS.Model.Atsiskaitymas", "Atsiskaitymas")
+                        .WithMany()
+                        .HasForeignKey("fk_Atsiskaitymas");
+
                     b.HasOne("Mokyklu_IS.Model.Mokinys", "Mokinys")
                         .WithMany()
                         .HasForeignKey("fk_Mokinys");
@@ -367,6 +664,17 @@ namespace Mokyklu_IS.Migrations
                     b.HasOne("Mokyklu_IS.Model.Susirinkimas", "Susirinkimas")
                         .WithMany()
                         .HasForeignKey("fk_Susirinkimas");
+                });
+
+            modelBuilder.Entity("Mokyklu_IS.Model.Zinutes", b =>
+                {
+                    b.HasOne("Mokyklu_IS.Model.Mokytojas", "Mokytojas")
+                        .WithMany()
+                        .HasForeignKey("fk_Mokytojas");
+
+                    b.HasOne("Mokyklu_IS.Model.Tevas", "Tevas")
+                        .WithMany()
+                        .HasForeignKey("fk_Tevas");
                 });
 #pragma warning restore 612, 618
         }
