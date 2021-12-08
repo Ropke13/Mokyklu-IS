@@ -1,9 +1,8 @@
 ﻿@page
-@model Mokyklu_IS.Pages.Admin.PriskyrimasModel
+@model Mokyklu_IS.Pages.Admin.Priskirti_KlaseModel
 @{
     Layout = "/Pages/Shared/_AdminLayout.cshtml";
 }
-
 <div class="text-center">
     <form method="post">
         <div class="container">
@@ -19,7 +18,7 @@
                     </tr>
                     @foreach (var item in Model.Mokinys)
                     {
-                        @if (item.fk_Tevas == null)
+                        @if (item.fk_Klase == null)
                         {
                             <tr>
                                 <td>@Html.DisplayFor(m => item.Vardas)</td>
@@ -27,9 +26,9 @@
                                 <td>
                                     <select class="custom-select" style="width:200px;" name="role" id="role">
                                         <option value="0">-</option>
-                                        @foreach (var tev in Model.Tevas)
+                                        @foreach (var klas in Model.Klase)
                                         {
-                                            <option value="@tev.Id_Tevas">@tev.Vardas @tev.Pavarde</option>
+                                            <option value="@klas.Id_Klase">@klas.Pavadinimas</option>
                                         }
                                     </select>
                                 </td>
@@ -43,8 +42,8 @@
             }
             else
             {
-                <p>Nera nepriskirtu mokiniu</p>
+                <p>Nera mokiniu</p>
             }
         </div>
-        </form>
+    </form>
 </div>

@@ -9,21 +9,21 @@ using Mokyklu_IS.Model;
 
 namespace Mokyklu_IS.Pages.Admin
 {
-    public class PriskyrimasModel : PageModel
+    public class Priskirti_KlaseModel : PageModel
     {
         private readonly ApplicationDbContext _db;
 
-        public PriskyrimasModel(ApplicationDbContext db)
+        public Priskirti_KlaseModel(ApplicationDbContext db)
         {
             _db = db;
         }
 
         public IEnumerable<Model.Mokinys> Mokinys { get; set; }
-        public IEnumerable<Tevas> Tevas { get; set; }
+        public IEnumerable<Klase> Klase { get; set; }
         public async Task OnGet()
         {
             Mokinys = await _db.Mokinys.ToListAsync();
-            Tevas = await _db.Tevas.ToListAsync();
+            Klase = await _db.Klase.ToListAsync();
         }
         public async Task<IActionResult> OnPostPatvirtinti(int id)
         {
@@ -31,16 +31,16 @@ namespace Mokyklu_IS.Pages.Admin
 
             if (number != 0)
             {
-                var tev = await _db.Tevas.FindAsync(number);
+                var klas = await _db.Klase.FindAsync(number);
                 var mok = await _db.Mokinys.FindAsync(id);
 
-                mok.fk_Tevas = tev.Id_Tevas;
+                mok.fk_Klase = klas.Id_Klase;
 
                 await _db.SaveChangesAsync();
 
-                return RedirectToPage("/Admin/Priskyrimas");
+                return RedirectToPage("/Admin/Priskirti_Klase");
             }
-            return RedirectToPage("/Admin/Priskyrimas");
+            return RedirectToPage("/Admin/Priskirti_Klase");
         }
     }
 }

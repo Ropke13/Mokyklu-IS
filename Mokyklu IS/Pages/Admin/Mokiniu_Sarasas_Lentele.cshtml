@@ -6,18 +6,30 @@
 
 <div class="text-center">
     <div class="container">
-        <h3 class="display-4">Pasirinkto Mokytojo Mokiniai</h3>
-        <table id="customers">
-            <tr>
-                <th>Vardas</th>
-                <th>Pavardė</th>
-            </tr>
-            <tr>
-                <td>Vardenis</td>
-                <td>Pavardenis</td>
-            </tr>
-        </table><br /><br />
-
+        
+        <h3 class="display-4">@Model.Mokytojas.Vardas @Model.Mokytojas.Pavarde Mokiniai</h3>
+        @if (Model.MokinysL.Count() > 0)
+        {
+            <table id="customers">
+                <tr>
+                    <th>Vardas</th>
+                    <th>Pavardė</th>
+                </tr>
+                @foreach (var item in Model.MokinysL)
+                {
+                    @foreach (var item1 in Model.Destymas)
+                    {
+                        if (item.fk_Klase == item1.fk_Klase && item1.fk_Mokytojas == Model.Mokytojas.Id_Mokytojas)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.Vardas)</td>
+                                <td>@Html.DisplayFor(m => item.Pavarde)</td>
+                            </tr>
+                        }
+                    }
+                }
+            </table><br /><br />
+        }
         <form style="display: inline" asp-area="" asp-page="/Admin/Mokiniu_Sarasas" method="get">
             <button type="submit" class="registerbtn">Grįšti Atgal</button>
         </form>

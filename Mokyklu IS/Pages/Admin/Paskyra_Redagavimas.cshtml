@@ -4,29 +4,31 @@
     Layout = "/Pages/Shared/_AdminLayout.cshtml";
 }
 <div class="text-center">
+    <form method="post">
+        <input type="hidden" asp-for="Registracija.Id_Registracija" />
         <div class="container">
             <h1>Paskyros Redagavimas</h1>
             <hr>
 
             <label for="vardas"><b>Vardas</b></label><br>
-            <input type="text" placeholder="Iveskite Vardą" name="vardas" id="vardas" required><br><br>
+            <input asp-for="Registracija.Vardas" type="text" placeholder="Iveskite Vardą" required><br><br>
 
             <label for="pavarde"><b>Pavardė</b></label><br>
-            <input type="text" placeholder="Iveskite Pavardę" name="pavarde" id="pavarde" required><br><br>
+            <input asp-for="Registracija.Pavarde" type="text" placeholder="Iveskite Pavardę" required><br><br>
 
             <label for="tel-nr"><b>Telefonas</b></label><br>
-            <input type="text" placeholder="Iveskite Tel Numerį" name="tel-nr" id="tel-nr" required><br><br>
+            <input asp-for="Registracija.Telefono_nr" type="text" placeholder="Iveskite Tel Numerį" required><br><br>
 
             <label for="asmens-kodas"><b>Asmens Kodas</b></label><br>
-            <input type="text" placeholder="Iveskite Asmanes Kodą" name="asmens_kodas" id="asmens_kodas" required><br><br>
+            <input asp-for="Registracija.Asmens_kodas" type="text" placeholder="Iveskite Asmanes Kodą" required><br><br>
             <hr>
+   
+            <div class="container">
+                <input type="submit" value="Update" class="btn btn-primary form-control" />
+            </div><br />
 
-            <form style="display: inline" asp-area="" asp-page="/Admin/PaskiruTvarkykle" method="get">
-                <button class="registerbtn">Redaguoti</button>
-            </form>
-
-            <form style="display: inline" asp-area="" asp-page="/Admin/PaskiruTvarkykle" method="get">
-                <button class="registerbtn">Grįšti Atgal</button>
-            </form>
+            <a asp-page="/Admin/PaskiruTvarkykle" class="btn btn-success form-control">Gristi Atgal</a>
         </div>
+
+</form>
 </div>

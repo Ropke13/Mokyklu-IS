@@ -5,78 +5,79 @@
 }
 
 <div class="text-center">
-    <div class="container-fluid">
-        <div style="width: 45%; float:left">
-            <h3 class="display-4">Laukia Patvirtinimo</h3>
-            @if (Model.Registracija.Count() > 0) 
-            {
-            <table id="customers">
-                <tr>
-                    <th>Vardas</th>
-                    <th>Pavardė</th>
-                    <th>Asmens Kodas</th>
-                    <th>Tipas</th>
-                    <th></th>
-                </tr>
-                @foreach (var item in Model.Registracija)
+    <form method="post">
+        <div class="container-fluid">
+            <div style="width: 45%; float:left">
+                <h3 class="display-4">Laukia Patvirtinimo</h3>
+                @if (Model.Registracija.Count() > 0)
                 {
-                @if (item.Ar_patvirtinta == false)
-                {
-                <tr>
-                    <td>@Html.DisplayFor(m => item.Vardas)</td>
-                    <td>@Html.DisplayFor(m => item.Pavarde)</td>
-                    <td>@Html.DisplayFor(m => item.Asmens_kodas)</td>
-                    <td>@Html.DisplayFor(m => item.Role)</td>
-                    <td>
-                        <button class="button1">Patvirtinti</button>
-                        <button class="button2">Atmesti</button>
-                    </td>
-                </tr>
-                    }
+                    <table id="customers">
+                        <tr>
+                            <th>Vardas</th>
+                            <th>Pavardė</th>
+                            <th>Asmens Kodas</th>
+                            <th>Tipas</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in Model.Registracija)
+                        {
+                            @if (item.Ar_patvirtinta == false)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.Vardas)</td>
+                                    <td>@Html.DisplayFor(m => item.Pavarde)</td>
+                                    <td>@Html.DisplayFor(m => item.Asmens_kodas)</td>
+                                    <td>@Html.DisplayFor(m => item.Role)</td>
+                                    <td>
+                                        <button asp-page-handler="Patvirtinti" asp-route-id="@item.Id_Registracija" class="button1">Patvirtinti</button>
+                                        <button asp-page-handler="Delete" asp-route-id="@item.Id_Registracija" onclick="return confirm('Ar tikrai norite atmesti sia paskyra ?')" class="button2">Atmesti</button>
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    </table>
                 }
-            </table>
-            }
-            else
-            {
-                <p>Nera duomenu bazeje duomenu</p>
-            }
-        </div>
-        <div style="width: 10%; float:right">
-        </div>
-        <div style="width: 45%; float:right">
-            <h3 class="display-4">Visos Paskyros</h3>
-            @if (Model.Registracija.Count() > 0)
-            {
+                else
+                {
+                    <p>Nera duomenu bazeje duomenu</p>
+                }
+            </div>
+            <div style="width: 10%; float:right">
+            </div>
+            <div style="width: 45%; float:right">
+                <h3 class="display-4">Visos Paskyros</h3>
+                @if (Model.Registracija.Count() > 0)
+                {
 
 
-                <table id="customers">
-                <tr>
-                    <th>Vardas</th>
-                    <th>Pavardė</th>
-                    <th>Asmens Kodas</th>
-                    <th>Tipas</th>
-                    <th></th>
-                </tr>
-                @foreach (var item in Model.Registracija) {
-                <tr>
-                    <td>@Html.DisplayFor(m => item.Vardas)</td>
-                    <td>@Html.DisplayFor(m => item.Pavarde)</td>
-                    <td>@Html.DisplayFor(m => item.Asmens_kodas)</td>
-                    <td>@Html.DisplayFor(m => item.Role)</td>
-                    <td>
-                        <form style="display: inline" asp-area="" asp-page="/Admin/Paskyra_Redagavimas" method="get">
-                            <button class="button1">Redaguoti</button>
-                        </form>
-                        <button class="button2">Pašalinti</button>
-                    </td>
-                </tr>
+                    <table id="customers">
+                        <tr>
+                            <th>Vardas</th>
+                            <th>Pavardė</th>
+                            <th>Asmens Kodas</th>
+                            <th>Tipas</th>
+                            <th></th>
+                        </tr>
+                        @foreach (var item in Model.Registracija)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.Vardas)</td>
+                                <td>@Html.DisplayFor(m => item.Pavarde)</td>
+                                <td>@Html.DisplayFor(m => item.Asmens_kodas)</td>
+                                <td>@Html.DisplayFor(m => item.Role)</td>
+                                <td>
+                                    <a asp-page="/Admin/Paskyra_Redagavimas" asp-route-id="@item.Id_Registracija" class="btn btn-success btn-sm text-white">Redaguoti</a>
+                                    <button asp-page-handler="Delete" asp-route-id="@item.Id_Registracija" onclick="return confirm('Ar tikrai norite pasalinti sia paskyra ?')" class="button2">Pašalinti</button>
+                                </td>
+                            </tr>
+                        }
+                    </table>
                 }
-            </table>
-            }
-            else
-            {
-                <p>Nera Duomenu bazeje registruotu vartotoju</p>
-            }
+                else
+                {
+                    <p>Nera Duomenu bazeje registruotu vartotoju</p>
+                }
+            </div>
         </div>
-    </div>
+    </form>
 </div>

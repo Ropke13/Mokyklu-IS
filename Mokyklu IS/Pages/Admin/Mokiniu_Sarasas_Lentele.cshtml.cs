@@ -17,18 +17,16 @@ namespace Mokyklu_IS.Pages.Admin
         {
             _db = db;
         }
-
-        public IEnumerable<Model.Mokytojas> Mokytojas { get; set; }
+        [BindProperty]
+        public Model.Mokytojas Mokytojas { get; set; }
+        public IEnumerable<Model.Mokinys> MokinysL { get; set; }
         public IEnumerable<Destymas> Destymas { get; set; }
-        public IEnumerable<Klase> Klase { get; set; }
-        public IEnumerable<Model.Mokinys> Mokinys { get; set; }
 
-        public async Task OnGet()
+        public async Task OnGet(int id)
         {
-            Mokytojas = await _db.Mokytojas.ToListAsync();
+            Mokytojas = await _db.Mokytojas.FindAsync(id);
             Destymas = await _db.Destymas.ToListAsync();
-            Klase = await _db.Klase.ToListAsync();
-            Mokinys = await _db.Mokinys.ToListAsync();
+            MokinysL = await _db.Mokinys.ToListAsync();
         }
     }
 }
