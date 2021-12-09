@@ -14,6 +14,7 @@
                 <tr>
                     <th>Vardas</th>
                     <th>Pavardė</th>
+                    <th>Klasė</th>
                 </tr>
                 @foreach (var item in Model.MokinysL)
                 {
@@ -24,6 +25,13 @@
                             <tr>
                                 <td>@Html.DisplayFor(m => item.Vardas)</td>
                                 <td>@Html.DisplayFor(m => item.Pavarde)</td>
+                                @foreach (var klas in Model.Klase)
+                            {
+                                    if(item.fk_Klase == klas.Id_Klase)
+                                {
+                                    <td>@Html.DisplayFor(m => klas.Pavadinimas)</td>
+                                }
+                            }
                             </tr>
                         }
                     }

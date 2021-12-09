@@ -5,19 +5,43 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using Mokyklu_IS.Model;
 
 namespace Mokyklu_IS.Pages
 {
     public class RegistrationModel : PageModel
     {
-        private readonly ILogger<RegistrationModel> _logger;
+        //private readonly ILogger<RegistrationModel> _logger;
+        private readonly ApplicationDbContext _db;
 
-        public RegistrationModel(ILogger<RegistrationModel> logger)
+        public RegistrationModel(ApplicationDbContext db)
         {
-            _logger = logger;
+            _db = db;
         }
+
+        [BindProperty]
+        public Registracija Registracija { get; set; }
+
+        //public RegistrationModel(ILogger<RegistrationModel> logger)
+        //{
+        //    _logger = logger;
+        //}
+
+
         public void OnGet()
         {
+
+        }
+
+        public async Task<IActionResult> OnPostPatvirtinti()
+        {
+            string role = Request.Form["role"];
+            Registracija.Ar_patvirtinta = false;
+            Registracija.Role = role;
+
+            await _db.Registracija.AddAsync(Registracija);
+            await _db.SaveChangesAsync();
+            return RedirectToPage("Index");
         }
     }
 }

@@ -5,42 +5,42 @@
 }
 
 <div class="text-center">
-    <form action="">
+    <form method="post">
         <div class="container">
             <h1>Registracija</h1>
             <p>Užpildykite registracijos formą</p>
             <hr>
 
             <label for="prisijungimo_vardas"><b>Prisijungimo Vardas</b></label><br>
-            <input type="text" placeholder="Iveskite Prisijungimo Vardą" name="pris_vardas" id="pris_vardas" required><br><br>
+            <input asp-for="Registracija.Prisijungimo_vardas" type="text" placeholder="Iveskite Prisijungimo Vardą" required><br><br>
 
             <label for="vardas"><b>Vardas</b></label><br>
-            <input type="text" placeholder="Iveskite Vardą" name="vardas" id="vardas" required><br><br>
+            <input asp-for="Registracija.Vardas" type="text" placeholder="Iveskite Vardą" required><br><br>
 
             <label for="pavarde"><b>Pavardė</b></label><br>
-            <input type="text" placeholder="Iveskite Pavardę" name="pavarde" id="pavarde" required><br><br>
+            <input asp-for="Registracija.Pavarde" type="text" placeholder="Iveskite Pavardę" required><br><br>
 
             <label for="tel-nr"><b>Telefonas</b></label><br>
-            <input type="text" placeholder="Iveskite Tel Numerį" name="tel-nr" id="tel-nr" required><br><br>
+            <input asp-for="Registracija.Telefono_nr" type="text" placeholder="Iveskite Tel Numerį" required><br><br>
 
             <label for="asmens-kodas"><b>Asmens Kodas</b></label><br>
-            <input type="text" placeholder="Iveskite Asmanes Kodą" name="asmens_kodas" id="asmens_kodas" required><br><br>
+            <input asp-for="Registracija.Asmens_kodas" type="text" placeholder="Iveskite Asmanes Kodą" required><br><br>
 
             <label for="role"><b>Paskyros Tipas:</b></label><br>
             <select class="custom-select" style="width:200px;" name="role" id="role">
-                <option value="mokinys">Mokinys</option>
-                <option value="mokytojas">Mokytojas</option>
-                <option value="tevas">Tėvas</option>
+                <option value="Mokinys">Mokinys</option>
+                <option value="Mokytojas">Mokytojas</option>
+                <option value="Tevas">Tėvas</option>
             </select><br><br>
 
             <label for="psw"><b>Slaptažodis</b></label><br>
-            <input type="password" placeholder="Iveskite Slaptažodį" name="psw" id="psw" required><br><br>
+            <input asp-for="Registracija.Slaptazodis" type="password" placeholder="Iveskite Slaptažodį" required><br><br>
 
             <label for="psw-repeat"><b>Pakartokite slaptažodį</b></label><br>
             <input type="password" placeholder="Pakartokite slaptažodį" name="psw-repeat" id="psw-repeat" required><br><br>
             <hr>
 
-            <button type="submit" class="registerbtn">Registruotis</button>
+            <button asp-page-handler="Patvirtinti" class="button1">Patvirtinti</button>
         </div>
     </form>
 </div>

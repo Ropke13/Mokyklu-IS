@@ -21,12 +21,14 @@ namespace Mokyklu_IS.Pages.Admin
         public Model.Mokytojas Mokytojas { get; set; }
         public IEnumerable<Model.Mokinys> MokinysL { get; set; }
         public IEnumerable<Destymas> Destymas { get; set; }
+        public IEnumerable<Klase> Klase { get; set; }
 
         public async Task OnGet(int id)
         {
             Mokytojas = await _db.Mokytojas.FindAsync(id);
             Destymas = await _db.Destymas.ToListAsync();
             MokinysL = await _db.Mokinys.ToListAsync();
+            Klase = await _db.Klase.ToListAsync();
         }
     }
 }
