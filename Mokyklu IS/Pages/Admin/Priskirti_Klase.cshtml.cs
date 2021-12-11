@@ -27,9 +27,15 @@ namespace Mokyklu_IS.Pages.Admin
         }
         public async Task<IActionResult> OnPostPatvirtinti(string id)
         {
-            int number = int.Parse(Request.Form["role"]);
+            string number = Request.Form["role"];
+            char[] MyChar = { '0', ' ', ',' };
 
-            if (number != 0)
+            foreach (char c in MyChar)
+            {
+                number = number.Replace(c.ToString(), String.Empty);
+            }
+
+            if (number != "NULL")
             {
                 var klas = await _db.Klase.FindAsync(number);
                 var mok = await _db.Mokinys.FindAsync(id);

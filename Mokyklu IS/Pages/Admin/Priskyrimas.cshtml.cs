@@ -28,8 +28,14 @@ namespace Mokyklu_IS.Pages.Admin
         public async Task<IActionResult> OnPostPatvirtinti(string id)
         {
             string number = Request.Form["role"];
+            char[] MyChar = { '0', ' ', ',' };
 
-            if (number != null)
+            foreach (char c in MyChar)
+            {
+                   number= number.Replace(c.ToString(), String.Empty);
+            }
+
+            if (number != "NULL")
             {
                 var tev = await _db.Tevas.FindAsync(number);
                 var mok = await _db.Mokinys.FindAsync(id);
