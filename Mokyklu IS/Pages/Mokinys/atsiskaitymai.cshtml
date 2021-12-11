@@ -20,7 +20,7 @@
                 {
                     @foreach (var k in Model.Mokytojas)
                     {
-                        @if (j.fk_Mokytojas == k.Id_Mokytojas && i.Id_Dalykas == k.fk_Dalykas)
+                        @if (j.fk_Mokytojas == k.Asmens_kodas && i.Id_Dalykas == k.fk_Dalykas)
                         {
                             <tr>
                                 <td style="width:30%">@Html.DisplayFor(m => j.Data.Year)-@Html.DisplayFor(m => j.Data.Month)-@Html.DisplayFor(m => j.Data.Day)</td>

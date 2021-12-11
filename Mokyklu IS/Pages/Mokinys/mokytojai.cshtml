@@ -18,7 +18,7 @@
                  {
                        @foreach (var item in Model.Mokytojas)
                         {
-                            if (item1.fk_Klase == 2 @*REIKIA PAKEISTI ta 2, NES KOLKAS PADARYTA VIENAM PASIRINKTAM STUDENTUI*@ && item1.fk_Mokytojas == item.Id_Mokytojas)
+                            if (item1.fk_Klase == 2 @*REIKIA PAKEISTI ta 2, NES KOLKAS PADARYTA VIENAM PASIRINKTAM STUDENTUI*@ && item1.fk_Mokytojas == item.Asmens_kodas)
                             {
                                 <tr>
                                     <td>@Html.DisplayFor(m => item.Vardas) @Html.DisplayFor(m => item.Pavarde)</td>

@@ -27,9 +27,9 @@ namespace Mokyklu_IS.Pages.Admin
         }
         public async Task<IActionResult> OnPostPatvirtinti(string id)
         {
-            int number = int.Parse(Request.Form["role"]);
+            string number = Request.Form["role"];
 
-            if (number != 0)
+            if (number != null)
             {
                 var tev = await _db.Tevas.FindAsync(number);
                 var mok = await _db.Mokinys.FindAsync(id);
