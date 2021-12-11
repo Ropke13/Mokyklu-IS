@@ -8,42 +8,70 @@
     <div class="container">
         <h3 class="display-4">Mano namų darbai</h3>
         <hr>
-        <h4 class="display-5">Lietuvių kalba</h4>
-        <table id="customers">
-            <tr>
-                <th>Atlikti iki</th>
-                <th>Aprašymas</th>
-                <th>Tema</th>
-            </tr>
-            <tr>
-                <td>2020-12-06</td>
-                <td>Atlikti pirmų pratybų 17psl. visas užduotis</td>
-                <td>Rašinio ypatumai</td>
-            </tr>
-            <tr>
-                <td>2021-11-15</td>
-                <td>Aprašyti savo vardo kilmę (200+ žodžių)</td>
-                <td>Rašinio ypatumai</td>
-            </tr>
-        </table><br /><br />
-
-        <h4 class="display-5">Matematika</h4>
-        <table id="customers">
-            <tr>
-                <th>Atlikti iki</th>
-                <th>Aprašymas</th>
-                <th>Tema</th>
-            </tr>
-            <tr>
-                <td>2020-11-05</td>
-                <td>Apskaičiuoti logaritmus, kurie buvo duoti pamokos metu</td>
-                <td>Logaritmai</td>
-            </tr>
-            <tr>
-                <td>2021-11-15</td>
-                <td>Pasiruošti pirmadienio atsiskaitymui</td>
-                <td>Pirma tema</td>
-            </tr>
-        </table>
+        @foreach (var i in Model.Dalykas)
+        {
+            <h4>@Html.DisplayFor(m => i.Pavadinimas)</h4>
+            <table id="customers">
+                <tr>
+                    <th style="width:20%">Atlikti iki</th>
+                    <th style="width:45%">Aprašymas</th>
+                    <th style="width:35%">Tema</th>
+                </tr>
+                @foreach (var j in Model.Namu_Darbas)
+                {
+                    @foreach (var k in Model.Mokytojas)
+                    {
+                        @if (j.fk_Mokytojas == k.Id_Mokytojas && i.Id_Dalykas == k.fk_Dalykas)
+                        {
+                            <tr>
+                                <td style="width:20%">@Html.DisplayFor(m => j.Data.Year)-@Html.DisplayFor(m => j.Data.Month)-@Html.DisplayFor(m => j.Data.Day)</td>
+                                <td style="width:45%">@Html.DisplayFor(m => j.Uzduotis)</td>
+                                <td style="width:35%">@Html.DisplayFor(m => j.Tema)</td>
+                            </tr>
+                        }
+                    }
+                }
+            </table><br /><br />
+        }
     </div>
 </div>
+
+@*<h4 class="display-5">Lietuvių kalba</h4>
+<table id="customers">
+    <tr>
+        <th>Atlikti iki</th>
+        <th>Aprašymas</th>
+        <th>Tema</th>
+    </tr>
+    <tr>
+        <td>2020-12-06</td>
+        <td>Atlikti pirmų pratybų 17psl. visas užduotis</td>
+        <td>Rašinio ypatumai</td>
+    </tr>
+    <tr>
+        <td>2021-11-15</td>
+        <td>Aprašyti savo vardo kilmę (200+ žodžių)</td>
+        <td>Rašinio ypatumai</td>
+    </tr>
+</table>
+<br />
+<br />
+
+<h4 class="display-5">Matematika</h4>
+<table id="customers">
+    <tr>
+        <th>Atlikti iki</th>
+        <th>Aprašymas</th>
+        <th>Tema</th>
+    </tr>
+    <tr>
+        <td>2020-11-05</td>
+        <td>Apskaičiuoti logaritmus, kurie buvo duoti pamokos metu</td>
+        <td>Logaritmai</td>
+    </tr>
+    <tr>
+        <td>2021-11-15</td>
+        <td>Pasiruošti pirmadienio atsiskaitymui</td>
+        <td>Pirma tema</td>
+    </tr>
+</table>*@

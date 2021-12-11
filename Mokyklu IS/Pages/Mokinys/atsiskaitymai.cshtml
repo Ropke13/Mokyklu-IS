@@ -8,23 +8,31 @@
     <div class="container">
         <h3 class="display-4">Mano atsiskaitymai</h3>
         <hr>
-        <h4 class="display-5">Lietuvių kalba</h4>
-        <table id="customers">
-            <tr>
-                <th>Atsiskaitymo data</th>
-                <th>Tema</th>
-            </tr>
-            <tr>
-                <td>2020-12-15</td>
-                <td>Rašinys</td>
-            </tr>
-            <tr>
-                <td>2021-11-20</td>
-                <td>Rašinys egzamino ruošimuisi</td>
-            </tr>
-        </table><br /><br />
+        @foreach (var i in Model.Dalykas)
+        {
+            <h4>@Html.DisplayFor(m => i.Pavadinimas)</h4>
+            <table id="customers">
+                <tr>
+                    <th style="width:30%">Atsiskaitymo data</th>
+                    <th style="width:70%">Tema</th>
+                </tr>
+                @foreach (var j in Model.Atsiskaitymas)
+                {
+                    @foreach (var k in Model.Mokytojas)
+                    {
+                        @if (j.fk_Mokytojas == k.Id_Mokytojas && i.Id_Dalykas == k.fk_Dalykas)
+                        {
+                            <tr>
+                                <td style="width:30%">@Html.DisplayFor(m => j.Data.Year)-@Html.DisplayFor(m => j.Data.Month)-@Html.DisplayFor(m => j.Data.Day)</td>
+                                <td style="width:70%">@Html.DisplayFor(m => j.Tema)</td>
+                            </tr>
+                        }
+                    }
+                }
+            </table><br /><br />
+        }
 
-        <h4 class="display-5">Matematika</h4>
+        @*<h4 class="display-5">Matematika</h4>
         <table id="customers">
             <tr>
                 <th>Atsiskaitymo data</th>
@@ -38,6 +46,6 @@
                 <td>2021-11-25</td>
                 <td>Išvestinės</td>
             </tr>
-        </table>
+        </table>*@
     </div>
 </div>
