@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Mokyklu_IS.Model;
 
@@ -30,10 +31,12 @@ namespace Mokyklu_IS.Pages
 
         public async Task<IActionResult> OnPost()
         {
+            HttpContext.Session.SetString("id", "");
             Tevas = await _db.Tevas.ToListAsync();
             Registracija = await _db.Registracija.ToListAsync();
             Mokytojas = await _db.Mokytojas.ToListAsync();
             Mokinys = await _db.Mokinys.ToListAsync();
+            Admin = await _db.Administratorius.ToListAsync();
             string pris_vard = Request.Form["pris_vardas"];
             string password = Request.Form["psw"];
             foreach(var item in Registracija)
@@ -41,34 +44,49 @@ namespace Mokyklu_IS.Pages
                 if(item.Prisijungimo_vardas == pris_vard && item.Slaptazodis == password)
                 {
                     int id = item.Id_Registracija;
-                    foreach(var mok in Mokinys)
+                    var role = item.Role;
+                    switch (role)
                     {
-                        if (mok.fk_Registracija == id && item.Ar_patvirtinta == true)
-                        {
-                            return RedirectToPage("/Mokinys/Index", new { ID = mok.Id_Mokinys });
-                        }
-                    }
-                    foreach (var mok in Mokytojas)
-                    {
-                        if (mok.fk_Registracija == id && item.Ar_patvirtinta == true)
-                        {
-                            return RedirectToPage("/Mokytojas/Index", new { ID = mok.Id_Mokytojas });
-                        }
-                    }
-                    foreach (var mok in Tevas)
-                    {
-                        if (mok.fk_Registracija == id && item.Ar_patvirtinta == true)
-                        {
-                            return RedirectToPage("/Tevai/Index", new { ID = mok.Id_Tevas });
-                        }
+                        case "Mokinys":
+                            foreach(var mok in Mokinys)
+                            {
+                                if (mok.fk_Registracija == id && item.Ar_patvirtinta == true)
+                                {
+                                    HttpContext.Session.SetString("id", mok.Asmens_kodas);
+                                    return RedirectToPage("/Mokinys/Index");
+                                }
+                            }
+                            break;
+                        case "Mokytojas":
+                            foreach (var mok in Mokytojas)
+                            {
+                                if (mok.fk_Registracija == id && item.Ar_patvirtinta == true)
+                                {
+                                    HttpContext.Session.SetString("id", mok.Asmens_kodas);
+                                    return RedirectToPage("/Mokytojas/Index");
+                                }
+                            }
+                            break;
+                        case "Tevas":
+                            foreach (var mok in Tevas)
+                            {
+                                if (mok.fk_Registracija == id && item.Ar_patvirtinta == true)
+                                {
+                                    HttpContext.Session.SetString("id", mok.Asmens_kodas);
+                                    return RedirectToPage("/Tevai/Index");
+                                }
 
-                    }
-                    foreach (var mok in Admin)
-                    {
-                        if (mok.fk_Registracija == id)
-                        {
-                            return RedirectToPage("/Admin/Index", new { ID = id });
-                        }
+                            }
+                            break;
+                        default:
+                            foreach (var mok in Admin)
+                            {
+                                if (mok.fk_Registracija == id)
+                                {
+                                    return RedirectToPage("/Admin/Index");
+                                }
+                            }
+                            break;
                     }
                 }
             }

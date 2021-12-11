@@ -19,7 +19,7 @@ namespace Mokyklu_IS.Model
 
         [ForeignKey("fk_Mokytojas")]
         public Mokytojas Mokytojas { get; set; }
-        public int fk_Mokytojas { get; set; }
+        public string fk_Mokytojas { get; set; }
 
         [ForeignKey("fk_Klase")]
         public Klase Klase { get; set; }

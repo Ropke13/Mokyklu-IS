@@ -20,7 +20,7 @@
                 {
                     @foreach (var item1 in Model.Destymas)
                     {
-                        if (item.fk_Klase == item1.fk_Klase && item1.fk_Mokytojas == Model.Mokytojas.Id_Mokytojas)
+                        if (item.fk_Klase == item1.fk_Klase && item1.fk_Mokytojas == Model.Mokytojas.Asmens_kodas)
                         {
                             <tr>
                                 <td>@Html.DisplayFor(m => item.Vardas)</td>

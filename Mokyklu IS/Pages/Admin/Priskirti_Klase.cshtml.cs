@@ -25,7 +25,7 @@ namespace Mokyklu_IS.Pages.Admin
             Mokinys = await _db.Mokinys.ToListAsync();
             Klase = await _db.Klase.ToListAsync();
         }
-        public async Task<IActionResult> OnPostPatvirtinti(int id)
+        public async Task<IActionResult> OnPostPatvirtinti(string id)
         {
             int number = int.Parse(Request.Form["role"]);
 

@@ -10,8 +10,6 @@ namespace Mokyklu_IS.Model
     public class Mokytojas
     {
         [Key]
-        public int Id_Mokytojas { get; set; }
-        [Required]
         public string Asmens_kodas { get; set; }
         [Required]
         public string Vardas { get; set; }

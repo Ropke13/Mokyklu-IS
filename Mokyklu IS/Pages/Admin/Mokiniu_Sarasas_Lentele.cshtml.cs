@@ -23,9 +23,9 @@ namespace Mokyklu_IS.Pages.Admin
         public IEnumerable<Destymas> Destymas { get; set; }
         public IEnumerable<Klase> Klase { get; set; }
 
-        public async Task OnGet(int id)
+        public async Task OnGet(string ID)
         {
-            Mokytojas = await _db.Mokytojas.FindAsync(id);
+            Mokytojas = await _db.Mokytojas.FindAsync(ID);
             Destymas = await _db.Destymas.ToListAsync();
             MokinysL = await _db.Mokinys.ToListAsync();
             Klase = await _db.Klase.ToListAsync();

@@ -6,14 +6,20 @@
 <div class="text-center">
     <div class="container">
         <h3 class="display-4">Klasės</h3>
-            @if (Model.Klase.Count() > 0)
+            @if (Model.Klases.Count() > 0)
             {
-            <table id="customers">
-                <tr>
-                    <th>Klasė</th>
-                    <th></th>
-                </tr>
-                @foreach (var item in Model.Klase)
+    <table id="customers">
+        <tr>
+            <th>Klasė</th>
+            <th></th>
+        </tr>
+        @foreach (var item in Model.Klases)
+        {
+            @foreach (var i in Model.Destymai)
+            {
+
+
+@if (item.Id_Klase == i.fk_Klase && i.fk_Mokytojas == Model.Mokytojas.Asmens_kodas)
                 {
                     <tr>
                         <td>
@@ -26,7 +32,9 @@
                         </td>
                     </tr>
                 }
-            </table>
+            }
+        }
+        </table>
             }
             else
             {

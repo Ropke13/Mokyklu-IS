@@ -29,12 +29,12 @@
                                         <option value="0">-</option>
                                         @foreach (var tev in Model.Tevas)
                                         {
-                                            <option value="@tev.Id_Tevas">@tev.Vardas @tev.Pavarde</option>
+                                            <option value="@tev.Asmens_kodas">@tev.Vardas @tev.Pavarde</option>
                                         }
                                     </select>
                                 </td>
                                 <td>
-                                    <button asp-page-handler="Patvirtinti" asp-route-id="@item.Id_Mokinys" class="button1">Priskirti</button>
+                                    <button asp-page-handler="Patvirtinti" asp-route-id="@item.Asmens_kodas" class="button1">Priskirti</button>
                                 </td>
                             </tr>
                         }

@@ -25,7 +25,7 @@ namespace Mokyklu_IS.Pages.Admin
             Mokinys = await _db.Mokinys.ToListAsync();
             Tevas = await _db.Tevas.ToListAsync();
         }
-        public async Task<IActionResult> OnPostPatvirtinti(int id)
+        public async Task<IActionResult> OnPostPatvirtinti(string id)
         {
             int number = int.Parse(Request.Form["role"]);
 
@@ -34,7 +34,7 @@ namespace Mokyklu_IS.Pages.Admin
                 var tev = await _db.Tevas.FindAsync(number);
                 var mok = await _db.Mokinys.FindAsync(id);
 
-                mok.fk_Tevas = tev.Id_Tevas;
+                mok.fk_Tevas = tev.Asmens_kodas;
 
                 await _db.SaveChangesAsync();
 
