@@ -8,21 +8,41 @@
     <div class="container">
         <h3 class="display-4">Mano pastabos</h3>
         <table id="customers">
-            <tr>
-                <th>Data</th>
-                <th>Mokytojas</th>
-                <th>Komentaras</th>
-            </tr>
-            <tr>
-                <td>2021-10-03</td>
-                <td>S. Petraitienė</td>
-                <td>Nesusikaupęs pamokos metu</td>
-            </tr>
-            <tr>
-                <td>2021-09-12</td>
-                <td>V. Barauskas</td>
-                <td>Neatliko namų darbų</td>
-            </tr>
+             <tr>
+                 <th style="width:20%">Data</th>
+                 <th style="width:35%">Mokytojas</th>
+                 <th style="width:45%">Komentaras</th>
+             </tr>
+            @foreach (var j in Model.Pastaba)
+             {
+                @foreach (var k in Model.Mokytojas)
+                 {
+                     @if (j.fk_Mokinys == 2 @*REIKIA PAKEISTI ta 2, NES KOLKAS PADARYTA VIENAM PASIRINKTAM STUDENTUI*@ && k.Id_Mokytojas == j.fk_Mokytojas)
+                      {
+                          <tr>
+                              <td style="width:20%">@Html.DisplayFor(m => j.Data.Year)-@Html.DisplayFor(m => j.Data.Month)-@Html.DisplayFor(m => j.Data.Day)</td>
+                              <td style="width:45%">@Html.DisplayFor(m => k.Vardas) @Html.DisplayFor(m => k.Pavarde)</td>
+                              <td style="width:35%">@Html.DisplayFor(m => j.Tekstas)</td>
+                          </tr>
+                      }
+                 }
+             }
         </table><br /><br />
     </div>
 </div>
+
+@*<tr>
+        <th>Data</th>
+        <th>Mokytojas</th>
+        <th>Komentaras</th>
+    </tr>
+    <tr>
+        <td>2021-10-03</td>
+        <td>S. Petraitienė</td>
+        <td>Nesusikaupęs pamokos metu</td>
+    </tr>
+    <tr>
+        <td>2021-09-12</td>
+        <td>V. Barauskas</td>
+        <td>Neatliko namų darbų</td>
+    </tr>*@

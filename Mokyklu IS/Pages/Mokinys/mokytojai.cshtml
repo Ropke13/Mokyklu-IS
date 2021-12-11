@@ -7,19 +7,48 @@
 <div class="text-center">
     <div class="container">
         <h3 class="display-4">Mano mokytojai</h3>
-        <table id="customers">
-            <tr>
-                <th>Mokytojas</th>
-                <th>Dalykas</th>
-            </tr>
-            <tr>
-                <td>S. Petraitienė</td>
-                <td>Matematika</td>
-            </tr>
-            <tr>
-                <td>V. Barauskas</td>
-                <td>Lietuvių k.</td>
-            </tr>
-        </table><br /><br />
+        @if (Model.Mokytojas.Count() > 0)
+         {
+            <table id="customers">
+                <tr>
+                    <th>Vardas Pavardė</th>
+                    <th>Dalykas</th>
+                </tr>
+                @foreach (var item1 in Model.Destymas)
+                 {
+                       @foreach (var item in Model.Mokytojas)
+                        {
+                            if (item1.fk_Klase == 2 @*REIKIA PAKEISTI ta 2, NES KOLKAS PADARYTA VIENAM PASIRINKTAM STUDENTUI*@ && item1.fk_Mokytojas == item.Id_Mokytojas)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.Vardas) @Html.DisplayFor(m => item.Pavarde)</td>
+                                    @foreach (var i in Model.Dalykas)
+                                     {
+                                         @if (i.Id_Dalykas == item.fk_Dalykas)
+                                          {
+                                             <td>@Html.DisplayFor(m => i.Pavadinimas)</td>
+                                          }
+                                     }
+                                </tr>
+                            }
+                        }
+                 }
+            </table><br /><br />
+         }
     </div>
 </div>
+
+@*<table id="customers">
+        <tr>
+            <th>Mokytojas</th>
+            <th>Dalykas</th>
+        </tr>
+        <tr>
+            <td>S. Petraitienė</td>
+            <td>Matematika</td>
+        </tr>
+        <tr>
+            <td>V. Barauskas</td>
+            <td>Lietuvių k.</td>
+        </tr>
+    </table><br /><br />*@
