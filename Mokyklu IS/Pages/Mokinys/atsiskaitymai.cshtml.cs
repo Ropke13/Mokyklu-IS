@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Mokyklu_IS.Model;
+using Microsoft.AspNetCore.Http;
 
 namespace Mokyklu_IS.Pages.Mokinys
 {
@@ -18,15 +19,16 @@ namespace Mokyklu_IS.Pages.Mokinys
             _db = db;
         }
 
-        public IEnumerable<Model.Mokinys> Mokinys { get; set; }
+        public Model.Mokinys Mokinys { get; set; }
         public IEnumerable<Atsiskaitymas> Atsiskaitymas { get; set; }
         public IEnumerable<Dalykas> Dalykas { get; set; }
         public IEnumerable<Model.Mokytojas> Mokytojas { get; set; }
         public async Task OnGet()
         {
-            Atsiskaitymas = await _db.Atsiskaitymas.ToListAsync();
-            Dalykas = await _db.Dalykas.ToListAsync();
-            Mokytojas = await _db.Mokytojas.ToListAsync();
+            string UserID = HttpContext.Session.GetString("id");
+            Mokinys = await _db.Mokinys.FindAsync(UserID);
+            Dalykas = await _db.Dalykas.ToListAsync(); // wow
+            Atsiskaitymas = await _db.Atsiskaitymas.Where(m => m.fk_Klase == Mokinys.fk_Klase).ToListAsync();
         }
     }
 }

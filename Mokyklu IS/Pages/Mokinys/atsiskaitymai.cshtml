@@ -8,33 +8,29 @@
     <div class="container">
         <h3 class="display-4">Mano atsiskaitymai</h3>
         <hr>
-        @foreach (var i in Model.Dalykas)
+        @foreach (var a in Model.Atsiskaitymas)
         {
-            <h4>@Html.DisplayFor(m => i.Pavadinimas)</h4>
-            <table id="customers">
-                <tr>
-                    <th style="width:30%">Atsiskaitymo data</th>
-                    <th style="width:70%">Tema</th>
-                </tr>
-                @foreach (var j in Model.Atsiskaitymas)
-                {
-                    @foreach (var k in Model.Mokytojas)
-                    {
-                        @if (j.fk_Mokytojas == k.Asmens_kodas && i.Id_Dalykas == k.fk_Dalykas)
-                        {
-                            <tr>
-                                <td style="width:30%">@Html.DisplayFor(m => j.Data.Year)-@Html.DisplayFor(m => j.Data.Month)-@Html.DisplayFor(m => j.Data.Day)</td>
-                                <td style="width:70%">@Html.DisplayFor(m => j.Tema)</td>
-                            </tr>
-                        }
-                    }
-                }
-            </table><br /><br />
+            @foreach (var i in Model.Dalykas)
+            {
+                <h4>@Html.DisplayFor(m => i.Pavadinimas)</h4>
+                <table id="customers">
+                    <tr>
+                        <th style="width:30%">Atsiskaitymo data</th>
+                        <th style="width:70%">Tema</th>
+                    </tr>
+                    <tr>
+                        <td style="width:30%">@Html.DisplayFor(lol => a.Data)</td>
+                        <td style="width:70%">@Html.DisplayFor(lol => a.Tema)</td>
+                    </tr>
+
+                </table><br /><br />
+            }
         }
 
         @*<h4 class="display-5">Matematika</h4>
         <table id="customers">
             <tr>
+            @foreach (var a in Model.Atsiskaitymas)
                 <th>Atsiskaitymo data</th>
                 <th>Tema</th>
             </tr>
