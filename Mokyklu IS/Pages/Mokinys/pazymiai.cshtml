@@ -12,20 +12,29 @@
                 <th>Pamoka</th>
                 <th>Pažymys</th>
                 <th>Komentaras</th>
-                <th>Data</th>
+                <th>Priežastis</th>
             </tr>
-            <tr>
-                <td>Matematika</td>
-                <td>9</td>
-                <td>Kontrolinis</td>
-                <td>2021-10-15</td>
-            </tr>
-            <tr>
-                <td>Lietuvių k.</td>
-                <td>10</td>
-                <td>Rašinėlis</td>
-                <td>2021-10-08</td>
-            </tr>
+            @foreach (var p in Model.Pazymys)
+             {
+                @foreach (var m in Model.Mokytojas)
+                 {
+                    @if (p.fk_Mokytojas == m.Asmens_kodas)
+                     {
+                        @foreach (var d in Model.Dalykas)
+                         {
+                            @if (m.fk_Dalykas == d.Id_Dalykas)
+                             {
+                                <tr>
+                                    <td style="width:30%">@Html.DisplayFor(xd => d.Pavadinimas)</td>
+                                    <td style="width:15%">@Html.DisplayFor(xd => p.Ivertis)</td>
+                                    <td style="width:35%">@Html.DisplayFor(xddddddd => p.Komentaras)</td>
+                                    <td style="width:20%">@Html.DisplayFor(pzdaKaipJuokinga => p.Vertinimo_priezastis)</td>
+                                </tr>
+                             }
+                         }
+                     }
+                 }
+             }
         </table><br /><br />
     </div>
 </div>
