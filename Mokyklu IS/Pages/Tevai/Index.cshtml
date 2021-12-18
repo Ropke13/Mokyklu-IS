@@ -12,13 +12,16 @@
                 <th>Pavardė</th>
                 <th></th>
             </tr>
-            <tr>
-                <td>Vardenis</td>
-                <td>Pavardenis</td>
-                <td>
-                    <a asp-page="/Tevai/Vaikas" asp-route-ID="" class="btn btn-primary m-1">Pasirinkti</a>
-                </td>
-            </tr>
+                @foreach (var item in Model.Vaikai)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.Vardas)</td>
+                        <td>@Html.DisplayFor(m => item.Pavarde)</td>
+                        <td>
+                            <a asp-page="/Tevai/Vaikas" asp-route-ID="@item.Asmens_kodas" class="btn btn-primary m-1">Pasirinkti</a>
+                        </td>
+                    </tr>
+                }
         </table>
     </div>
 </div>

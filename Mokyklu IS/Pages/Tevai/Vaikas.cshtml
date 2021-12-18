@@ -3,3 +3,17 @@
 @{
     Layout = "/Pages/Shared/_TevaiLayout.cshtml";
 }
+<div class="text-center">
+    <div class="container">
+        <h3 class="display-4">@Model.Mokinys.Vardas  @Model.Mokinys.Pavarde</h3>
+        <div class="container">
+            <a asp-page="/Tevai/Pastabos" asp-route-ID="@Model.Mokinys.Asmens_kodas" class="btn btn-primary m-1">Pastabos</a>
+        </div>
+        <div class="container">
+            <a asp-page="/Tevai/Pazymiai" asp-route-ID="@Model.Mokinys.Asmens_kodas" class="btn btn-primary m-1">Pažymiai</a>
+        </div>
+        <div class="container">
+            <a asp-page="/Tevai/Tvarkarastis" asp-route-ID="@Model.Mokinys.Asmens_kodas" class="btn btn-primary m-1">Tvarkaraštis</a>
+        </div>
+    </div>
+</div>
