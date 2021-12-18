@@ -20,19 +20,18 @@ namespace Mokyklu_IS.Pages.Mokytojas
         }
         public string UserID { get; set; }
         [BindProperty]
-        public Registracija Registracija { get; set; }
-        [BindProperty]
         public Model.Mokytojas Mokytojas { get; set; }
-
         public IEnumerable<Klase> Klases { get; set; }
+        public IEnumerable<Klase> Ats { get; set; }
         public IEnumerable<Destymas> Destymai { get; set; }
 
         public async Task OnGet()
         {
             UserID = HttpContext.Session.GetString("id");
             Mokytojas = await _db.Mokytojas.FindAsync(UserID);
+            Destymai = await _db.Destymas.Where(m => m.fk_Mokytojas==UserID).ToListAsync();
             Klases = await _db.Klase.ToListAsync();
-            Destymai = await _db.Destymas.ToListAsync();
+            Ats = (from kl in Klases where Destymai.Any(d => d.fk_Klase.Equals(kl.Id_Klase)==true) select kl).ToList();
         }
     }
 }

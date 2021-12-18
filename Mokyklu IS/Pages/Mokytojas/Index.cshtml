@@ -13,32 +13,24 @@
             <th>Klasė</th>
             <th></th>
         </tr>
-        @foreach (var item in Model.Klases)
+        @foreach (var item in Model.Ats)
         {
-            @foreach (var i in Model.Destymai)
-            {
-
-
-@if (item.Id_Klase == i.fk_Klase && i.fk_Mokytojas == Model.Mokytojas.Asmens_kodas)
-                {
                     <tr>
                         <td>
                             @Html.DisplayFor(m => item.Pavadinimas)
                         </td>
                         <td>
-                            <form style="display: inline" asp-area="" asp-page="/Mokytojas/Klase" method="get">
+                            <form style="display: inline" asp-area="" asp-page="/Mokytojas/Klase" asp-route-id="@item.Id_Klase" method="get">
                                 <button class="registerbtn">Rinktis</button>
                             </form>
                         </td>
                     </tr>
-                }
-            }
         }
         </table>
             }
             else
             {
-                <p>Duomenu bazeje nera jokiu klasiu</p>
+                <p>Duomenų bazėje nėra jokių klasių.</p>
             }
     </div>
 </div>
