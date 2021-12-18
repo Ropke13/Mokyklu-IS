@@ -5,40 +5,57 @@
 }
 <div class="text-center">
     <div class="container">
-        <h3 class="display-4">Mokinio Pažymiai</h3>
+        <h3 class="display-4">Mokinio @Model.Mokinys.Vardas @Model.Mokinys.Pavarde Pažymiai</h3>
         <table id="customers">
             <tr>
                 <th>Įvertinimas</th>
-                <th>Už ka</th>
+                <th>Priežastis</th>
                 <th>Komentaras</th>
+                <th>Atsiskaitymas</th>
                 <th></th>
             </tr>
             <tr>
-                <td>10</td>
-                <td>Kontrolinis</td>
-                <td>Puikus darbas!</td>
-                <td>
-                    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Pazimys_Edit" method="get">
-                        <button class="button1">Redag</button>
-                    </form>
-                </td>
+                @foreach (var item in Model.Ats)
+                {
+                    <td>@Html.DisplayFor(m => item.Ivertis)</td>
+                    <td>@Html.DisplayFor(m => item.Vertinimo_priezastis)</td>
+                    <td>@Html.DisplayFor(m => item.Komentaras)</td>
+                    @if (item.atsiskaitymas == "")
+                    {
+                        item.atsiskaitymas = "-";
+                    }
+                    <td>@Html.DisplayFor(m => item.atsiskaitymas)</td>
+                    <td>
+                        <a asp-page="/Mokytojas/Pazimys_Edit" asp-route-ID="@item.Id_Pazimys" class="button1">Redaguoti</a>
+                    </td>
+                }
             </tr>
         </table>
     </div>
     <hr>
     <h3 class="display-4">Įrašyti naują pazymį</h3>
+    <form method="post">
+        <div style="text-align:left" class="container">
 
-    <div style="text-align:left" class="container">
+            <label for="ivertis"><b>Įvertinimas</b></label><br>
+            <input asp-for="Pazimys.Ivertis" type="number" placeholder="" name="ivertis" id="ivertis" required><br><br>
 
-        <label for="ivertis"><b>Įvertinimas</b></label><br>
-        <input type="text" placeholder="" name="ivertis" id="ivertis" required><br><br>
+            <label for="uz_ka"><b>Priežastis</b></label><br>
+            <input asp-for="Pazimys.Vertinimo_priezastis" type="text" placeholder="" name="uz" id="uz" required><br><br>
 
-        <label for="uz_ka"><b>Už ka</b></label><br>
-        <input type="text" placeholder="" name="uz" id="uz" required><br><br>
+            <label for="koment"><b>Komentaras</b></label><br>
+            <input asp-for="Pazimys.Komentaras" type="text" placeholder="" name="kom" id="kom" required><br><br>
 
-        <label for="koment"><b>Komentaras</b></label><br>
-        <input type="text" placeholder="" name="kom" id="kom"><br><br>
+            <label for="test"><b>Atsiskaitymas</b></label><br>
+            <select class="custom-select" style="width:200px;" name="test" id="test">
+                <option value="0">-</option>
+                @foreach (var a in Model.Atsiskaitymai)
+                {
+                    <option value="@a.Id_Atsiskaitymas">@a.Tema</option>
+                }
+            </select>
 
-        <button type="submit" class="registerbtn">Įrašyti Pažymi</button>
-    </div><br /><br />
+            <button asp-page-handler="Submit" type="submit" class="registerbtn">Įrašyti Pažymi</button>
+        </div><br /><br />
+    </form>
 </div>

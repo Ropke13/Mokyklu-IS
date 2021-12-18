@@ -7,14 +7,10 @@
     <div class="container">
     <h1 class="display-4">Mokinys</h1>
 
-    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Pazimys" method="get">
-        <button class="registerbtn">Pažymiai</button>
-    </form>
+    <a class="btn btn-primary m-1" style="background-color: #00b377; font-weight: bold; width: 90%; height: 50px; line-height: 35px" asp-area="" asp-page="/Mokytojas/Pazimys" asp-route-ID="@Model.ID" method="get">Pažymiai</a>
 
     <br><br>
 
-    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Pastabos" method="get"> 
-        <button class="registerbtn">Pastabos</button>
-    </form>
+    <a class="btn btn-primary m-1" style="background-color: #00b377; font-weight: bold; width: 90%; height: 50px; line-height: 35px" asp-area="" asp-page="/Mokytojas/Pastabos" asp-route-ID="@Model.ID" method="get">Pastabos</a>
     </div>
 </div>

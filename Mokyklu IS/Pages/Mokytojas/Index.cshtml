@@ -20,9 +20,7 @@
                             @Html.DisplayFor(m => item.Pavadinimas)
                         </td>
                         <td>
-                            <form style="display: inline" asp-area="" asp-page="/Mokytojas/Klase" asp-route-id="@item.Id_Klase" method="get">
-                                <button class="registerbtn">Rinktis</button>
-                            </form>
+                            <a asp-page="/Mokytojas/Klase" asp-route-ID="@item.Id_Klase" class="btn btn-primary m-1">Rinktis</a>
                         </td>
                     </tr>
         }

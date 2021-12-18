@@ -3,35 +3,40 @@
 @{
     Layout = "/Pages/Shared/_MokytojasLayout.cshtml";
 }
+<style>
+    a:hover {
+        color: white;
+    }
+    a.btn, a.btn-primary, a.m-1:hover {
+        background-color: #00995c;
+    }
+</style>
 <div class="text-center">
     <div class="container">
-        <h3 class="display-4">Mokiniai</h3>
+        <h3 class="display-4">Klasės @Model.Klase.Pavadinimas mokiniai</h3>
         <table id="customers">
             <tr>
                 <th>Vardas</th>
                 <th>Pavardė</th>
                 <th></th>
             </tr>
-            <tr>
-                <td>Vardenis</td>
-                <td>Pavardenis</td>
-                <td>
-                    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Mokinys" method="get">
-                        <button class="registerbtn">Rinktis</button>
-                    </form>
-                </td>
-            </tr>
+            @foreach (var item in Model.Mokiniai)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.Vardas)</td>
+                    <td>@Html.DisplayFor(m => item.Pavarde)</td>
+                    <td>
+                        <a asp-page="/Mokytojas/Mokinys" asp-route-ID="@item.Asmens_kodas" class="button1">Rinktis</a>
+                    </td>
+                </tr>
+            }
         </table>
     </div>
     <hr>
     <div class="container">
-        <form style="display: inline" asp-area="" asp-page="/Mokytojas/Namu_Darbai" method="get">
-            <button class="registerbtn">Namų Darbai</button>
-        </form>
+        <a asp-page="/Mokytojas/Namu_Darbai" asp-route-ID="@Model.Klase.Id_Klase" class="btn btn-primary m-1" style="background-color: #00b377; font-weight: bold; width: 80%">Namų Darbai</a>
     </div>
     <div class="container">
-        <form style="display: inline" asp-area="" asp-page="/Mokytojas/Atsiskaitymai" method="get">
-            <button class="registerbtn">Atsiskaitymai</button>
-        </form>
+        <a asp-page="/Mokytojas/Atsiskaitymai" asp-route-ID="@Model.Klase.Id_Klase" class="btn btn-primary m-1" style="background-color: #00b377; font-weight: bold; width:80%">Atsiskaitymai</a>
     </div>
 </div>

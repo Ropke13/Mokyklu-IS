@@ -32,6 +32,10 @@ namespace Mokyklu_IS.Pages.Mokytojas
             Destymai = await _db.Destymas.Where(m => m.fk_Mokytojas==UserID).ToListAsync();
             Klases = await _db.Klase.ToListAsync();
             Ats = (from kl in Klases where Destymai.Any(d => d.fk_Klase.Equals(kl.Id_Klase)==true) select kl).ToList();
+
+            var mokytojai = await _db.Mokytojas.ToListAsync();
+            var pastabos = await _db.Pastaba.ToListAsync();
+            var ats = from mok in mokytojai join pas in pastabos on mok.Asmens_kodas equals pas.fk_Mokytojas select new { Tekstas = pas.Tekstas, Data = pas.Data, MVardas = mok.Vardas, MPavarde = mok.Pavarde };
         }
     }
 }

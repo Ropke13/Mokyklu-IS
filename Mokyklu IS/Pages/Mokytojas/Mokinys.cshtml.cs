@@ -9,8 +9,11 @@ namespace Mokyklu_IS.Pages.Mokytojas
 {
     public class MokinysModel : PageModel
     {
-        public void OnGet()
+        [BindProperty]
+        public string ID { get; set; }
+        public void OnGet(string id)
         {
+            ID = id;
         }
     }
 }
