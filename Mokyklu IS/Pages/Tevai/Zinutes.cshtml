@@ -26,12 +26,15 @@
                 <th>Data</th>
                 <th>Žinutė</th>
             </tr>
-            <tr>
-                <td>1</td>
-                <td>Ryčka</td>
-                <td>2001-09-11</td>
-                <td>Siandien nebus pamoku</td>
-            </tr>
+            @foreach (var item in Model.Ats)
+            {
+                <tr>
+                    <td></td>
+                    <td>@Html.DisplayFor(m => item.Tekstas)</td>
+                    <td>@Html.DisplayFor(m => item.Data)</td>
+                    <td>@Html.DisplayFor(m => item.MPavarde) @Html.DisplayFor(m => item.MVardas)</td>
+                </tr>
+            }
         </table><br /><br />
     </div>
 </div>

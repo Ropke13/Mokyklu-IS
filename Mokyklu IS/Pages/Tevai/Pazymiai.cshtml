@@ -8,23 +8,20 @@
         <h3 class="display-4">Vaiko pažymiai</h3>
         <table id="customers">
             <tr>
-                <th>Pamoka</th>
-                <th>Pažymys</th>
-                <th>Komentaras</th>
-                <th>Data</th>
+                <th style="width:5%">Pažymys</th>
+                <th style="width:40%">Priežastis</th>
+                <th style="width:40%">Komentaras</th>
+                <th style="width:15%">Mokytojas</th>
             </tr>
-            <tr>
-                <td>Matematika</td>
-                <td>9</td>
-                <td>Kontrolinis</td>
-                <td>2021-10-15</td>
-            </tr>
-            <tr>
-                <td>Lietuvių k.</td>
-                <td>10</td>
-                <td>Rašinėlis</td>
-                <td>2021-10-08</td>
-            </tr>
-        </table><br /><br />
+            @foreach (var item in Model.Ats)
+            {
+                <tr>
+                    <td style="width:5%">@Html.DisplayFor(m => item.Ivertis)</td>
+                    <td style="width:40%">@Html.DisplayFor(m => item.Priezastis)</td>
+                    <td style="width:40%">@Html.DisplayFor(m => item.Komentaras)</td>
+                    <td style="width:15%">@Html.DisplayFor(m => item.MPavarde) @Html.DisplayFor(m => item.MVardas)</td>
+                </tr>
+            }
+        </table>
     </div>
 </div>

@@ -25,7 +25,7 @@
                                 <td>@Html.DisplayFor(m => item.Vardas)</td>
                                 <td>@Html.DisplayFor(m => item.Pavarde)</td>
                                 <td>
-                                    <select class="custom-select" style="width:200px;" name="role" id="role">
+                                    <select class="custom-select" style="width:200px;" name="@item.Vardas" id="@item.Vardas">
                                         <option value="NULL">-</option>
                                         @foreach (var tev in Model.Tevas)
                                         {

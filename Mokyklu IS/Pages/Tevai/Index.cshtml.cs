@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Mokyklu_IS.Model;
+using Microsoft.AspNetCore.Http;
 
 namespace Mokyklu_IS.Pages.Tevai
 {
@@ -20,11 +21,13 @@ namespace Mokyklu_IS.Pages.Tevai
 
         public IEnumerable<Model.Mokinys> Mokinys { get; set; }
         public IEnumerable<Tevas> Tevai { get; set; }
+        public string UserID { get; set; }
+        public IEnumerable<Model.Mokinys> Vaikai { get; set; }
 
         public async Task OnGet()
         {
-            Mokinys = await _db.Mokinys.ToListAsync();
-            Tevai = await _db.Tevas.ToListAsync();
+            UserID = HttpContext.Session.GetString("id");
+            Vaikai = await _db.Mokinys.Where(m => m.fk_Tevas == UserID).ToListAsync();
         }
     }
 }

@@ -8,15 +8,18 @@
         <h3 class="display-4">Vaiko Pastabos</h3>
         <table id="customers">
             <tr>
-                <th>Mokytojas</th>
-                <th>Pastaba</th>
-                <th>Data</th>
+                <th style="width:20%">Data</th>
+                <th style="width:35%">Mokytojas</th>
+                <th style="width:45%">Komentaras</th>
             </tr>
-            <tr>
-                <td>Vytautas</td>
-                <td>Nepadare namu darbu. :)</td>
-                <td>2021-11-2</td>
-            </tr>
+            @foreach (var item in Model.Ats)
+            {
+                <tr>
+                    <td style="width:20%">@Html.DisplayFor(m => item.Data)</td>
+                    <td style="width:45%">@Html.DisplayFor(m => item.MPavarde) @Html.DisplayFor(m => item.MVardas)</td>
+                    <td style="width:35%">@Html.DisplayFor(m => item.Tekstas)</td>
+                </tr>
+            }
         </table>
     </div>
 </div>
