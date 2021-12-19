@@ -3,57 +3,110 @@
 @{
     Layout = "/Pages/Shared/_MokinysLayout.cshtml";
 }
-
 <div class="text-center">
-    <h3 class="display-4">5B tvarkaraštis</h3>
-</div>
+    <div class="container">
+        <div class="text-center">
+            <h3 class="display-4">@Model.Klase.Pavadinimas tvarkaraštis</h3>
+        </div>
 
-<table border="1" cellspacing="0" align="center">
-    <tr>
-        <td align="center" height="50" width="100"><b>Diena/Laikas</b></td>
-        <td align="center" height="50" width="100"><b>8:00-8:45</b></td>
-        <td align="center" height="50" width="100"><b>8:55-9:40</b></td>
-        <td align="center" height="50" width="100"><b>9:50-10:35</b></td>
-        <td align="center" height="50" width="100"><b>10:35-11:05</b></td>
-        <td align="center" height="50" width="100"><b>11:05-11:50</b></td>
-        <td align="center" height="50" width="100"><b>12:00-12:45</b></td>
-        <td align="center" height="50" width="100"><b>12:55-13:40</b></td>
-        <td align="center" height="50" width="100"><b>13:50-14:35</b></td>
-    </tr>
-    <tr>
-        <td align="center" height="50"><b> Pirmadienis </b></td>
-        <td align="center" height="50">Lietuvių k.</td>
-        <td align="center" height="50">Matematika</td>
-        <td align="center" height="50">Darbai</td>
-        <td rowspan="6" align="center" height="50">
-            <h2>I<br>L<br>G<br>O<br>J<br>I</h2>
-        </td>
-        <td align="center" height="50">Kūno kultūra</td>
-    </tr>
-    <tr>
-        <td align="center" height="50"><b> Antradienis </b></td>
-        <td align="center" height="50">Geografija</td>
-        <td align="center" height="50">Anglų k.</td>
-        <td align="center" height="50">Istorija</td>
-    </tr>
-    <tr>
-        <td align="center" height="50"><b> Trečiadienis </b></td>
-        <td align="center" height="50">Žmogaus</td>
-        <td align="center" height="50">Informatika</td>
-        <td align="center" height="50">Matematika</td>
-        <td align="center" height="50">Dailė</td>
-    </tr>
-    <tr>
-        <td align="center" height="50"><b> Ketvirtadienis </b></td>
-        <td align="center" height="50">Lietuvių k.</td>
-        <td align="center" height="50">Valandėlė</td>
-        <td align="center" height="50">Muzika</td>
-        <td align="center" height="50">Istorija</td>
-    </tr>
-    <tr>
-        <td align="center" height="50">Penktadienis</td>
-        <td align="center" height="50">Informatika</td>
-        <td align="center" height="50">Technologijos</td>
-        <td align="center" height="50">Tikyba</td>
-    </tr>
-</table>
+        <div class="text-center">
+            <h3 class="display-4">Pirmadienis</h3>
+        </div>
+        <table id="customers">
+            <tr>
+                <th>Pamoka</th>
+                <th>Laikas</th>
+            </tr>
+            @foreach (var item in Model.Tvarkarastis)
+            {
+                @if (int.Parse(item.Klase) == Model.Klase.Id_Klase && item.Sav_Diena == "Pirmadienis")
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.Pamoka)</td>
+                        <td>@Html.DisplayFor(m => item.Laikas)</td>
+                    </tr>
+                }
+            }
+        </table>
+
+        <div class="text-center">
+            <h3 class="display-4">Antradienis</h3>
+        </div>
+        <table id="customers">
+            <tr>
+                <th>Pamoka</th>
+                <th>Laikas</th>
+            </tr>
+            @foreach (var item in Model.Tvarkarastis)
+            {
+                @if (int.Parse(item.Klase) == Model.Klase.Id_Klase && item.Sav_Diena == "Antradienis")
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.Pamoka)</td>
+                        <td>@Html.DisplayFor(m => item.Laikas)</td>
+                    </tr>
+                }
+            }
+        </table>
+
+        <div class="text-center">
+            <h3 class="display-4">Trečiadienis</h3>
+        </div>
+        <table id="customers">
+            <tr>
+                <th>Pamoka</th>
+                <th>Laikas</th>
+            </tr>
+            @foreach (var item in Model.Tvarkarastis)
+            {
+                @if (int.Parse(item.Klase) == Model.Klase.Id_Klase && item.Sav_Diena == "Treciadienis")
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.Pamoka)</td>
+                        <td>@Html.DisplayFor(m => item.Laikas)</td>
+                    </tr>
+                }
+            }
+        </table>
+
+        <div class="text-center">
+            <h3 class="display-4">Ketvirtadienis</h3>
+        </div>
+        <table id="customers">
+            <tr>
+                <th>Pamoka</th>
+                <th>Laikas</th>
+            </tr>
+            @foreach (var item in Model.Tvarkarastis)
+            {
+                @if (int.Parse(item.Klase) == Model.Klase.Id_Klase && item.Sav_Diena == "Ketvirtadienis")
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.Pamoka)</td>
+                        <td>@Html.DisplayFor(m => item.Laikas)</td>
+                    </tr>
+                }
+            }
+        </table>
+
+        <div class="text-center">
+            <h3 class="display-4">Penktadienis</h3>
+        </div>
+        <table id="customers">
+            <tr>
+                <th>Pamoka</th>
+                <th>Laikas</th>
+            </tr>
+            @foreach (var item in Model.Tvarkarastis)
+            {
+                @if (int.Parse(item.Klase) == Model.Klase.Id_Klase && item.Sav_Diena == "Penktadienis")
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.Pamoka)</td>
+                        <td>@Html.DisplayFor(m => item.Laikas)</td>
+                    </tr>
+                }
+            }
+        </table>
+    </div>
+</div>

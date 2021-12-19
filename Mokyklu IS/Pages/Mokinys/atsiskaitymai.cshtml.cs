@@ -19,16 +19,21 @@ namespace Mokyklu_IS.Pages.Mokinys
             _db = db;
         }
 
+        public string id { get; set; }
         public Model.Mokinys Mokinys { get; set; }
+        public Klase Klase { get; set; }
         public IEnumerable<Atsiskaitymas> Atsiskaitymas { get; set; }
-        public IEnumerable<Dalykas> Dalykas { get; set; }
         public IEnumerable<Model.Mokytojas> Mokytojas { get; set; }
         public async Task OnGet()
         {
-            string UserID = HttpContext.Session.GetString("id");
-            Mokinys = await _db.Mokinys.FindAsync(UserID);
-            Dalykas = await _db.Dalykas.ToListAsync(); // wow
-            Atsiskaitymas = await _db.Atsiskaitymas.Where(m => m.fk_Klase == Mokinys.fk_Klase).ToListAsync();
+            id = HttpContext.Session.GetString("id");
+
+            Mokinys = await _db.Mokinys.FindAsync(id);
+            Klase = await _db.Klase.FindAsync(Mokinys.fk_Klase);
+
+            Mokytojas = await _db.Mokytojas
+                .Include(i => i.Dalykas).ToListAsync();
+            Atsiskaitymas = await _db.Atsiskaitymas.Where(m => m.fk_Klase == Klase.Id_Klase).ToListAsync();
         }
     }
 }

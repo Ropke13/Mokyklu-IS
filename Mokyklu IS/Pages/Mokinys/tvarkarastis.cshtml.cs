@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Mokyklu_IS.Model;
+using Microsoft.AspNetCore.Http;
 
 namespace Mokyklu_IS.Pages.Mokinys
 {
@@ -17,10 +18,15 @@ namespace Mokyklu_IS.Pages.Mokinys
         {
             _db = db;
         }
-
+        public string id { get; set; }
+        public Model.Mokinys Mokinys { get; set; }
+        public Klase Klase { get; set; }
         public IEnumerable<Tvarkarastis> Tvarkarastis { get; set; }
         public async Task OnGet()
         {
+            id = HttpContext.Session.GetString("id");
+            Mokinys = await _db.Mokinys.FindAsync(id);
+            Klase = await _db.Klase.FindAsync(Mokinys.fk_Klase);
             Tvarkarastis = await _db.Tvarkarastis.ToListAsync();
         }
     }

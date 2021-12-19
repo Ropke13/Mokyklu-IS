@@ -6,42 +6,27 @@
 
 <div class="text-center">
     <div class="container">
-        <h3 class="display-4">Mano atsiskaitymai</h3>
+        <h3 class="display-4">Mano Atsiskaitymai</h3>
         <hr>
-        @foreach (var a in Model.Atsiskaitymas)
+        @foreach (var i in Model.Mokytojas)
         {
-            @foreach (var i in Model.Dalykas)
-            {
-                <h4>@Html.DisplayFor(m => i.Pavadinimas)</h4>
-                <table id="customers">
-                    <tr>
-                        <th style="width:30%">Atsiskaitymo data</th>
-                        <th style="width:70%">Tema</th>
-                    </tr>
-                    <tr>
-                        <td style="width:30%">@Html.DisplayFor(lol => a.Data)</td>
-                        <td style="width:70%">@Html.DisplayFor(lol => a.Tema)</td>
-                    </tr>
-
-                </table><br /><br />
-            }
+            <h4>@Html.DisplayFor(m => i.Dalykas.Pavadinimas)</h4>
+            <table id="customers">
+                <tr>
+                    <th style="width:70%">Tema</th>
+                    <th style="width:30%">Data</th>
+                </tr>
+                @foreach (var j in Model.Atsiskaitymas)
+                {
+                    @if (j.Mokytojas.Dalykas.Pavadinimas == i.Dalykas.Pavadinimas)
+                    {
+                        <tr>
+                            <td style="width:35%">@Html.DisplayFor(m => j.Tema)</td>
+                            <td style="width:20%">@Html.DisplayFor(m => j.Data.Year)-@Html.DisplayFor(m => j.Data.Month)-@Html.DisplayFor(m => j.Data.Day)</td>
+                        </tr>
+                    }
+                }
+            </table><br /><br />
         }
-
-        @*<h4 class="display-5">Matematika</h4>
-        <table id="customers">
-            <tr>
-            @foreach (var a in Model.Atsiskaitymas)
-                <th>Atsiskaitymo data</th>
-                <th>Tema</th>
-            </tr>
-            <tr>
-                <td>2020-11-20</td>
-                <td>Logaritmai</td>
-            </tr>
-            <tr>
-                <td>2021-11-25</td>
-                <td>Išvestinės</td>
-            </tr>
-        </table>*@
     </div>
 </div>

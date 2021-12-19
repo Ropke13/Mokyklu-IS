@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -17,16 +18,21 @@ namespace Mokyklu_IS.Pages.Mokinys
         {
             _db = db;
         }
-
-        public IEnumerable<Model.Mokinys> Mokinys { get; set; }
+        public string id { get; set; }
+        public Model.Mokinys Mokinys { get; set; }
+        public Klase Klase { get; set; }
         public IEnumerable<Namu_Darbas> Namu_Darbas { get; set; }
-        public IEnumerable<Dalykas> Dalykas { get; set; }
         public IEnumerable<Model.Mokytojas> Mokytojas { get; set; }
         public async Task OnGet()
         {
-            Namu_Darbas = await _db.Namu_Darbas.ToListAsync();
-            Dalykas = await _db.Dalykas.ToListAsync();
-            Mokytojas = await _db.Mokytojas.ToListAsync();
+            id = HttpContext.Session.GetString("id");
+
+            Mokinys = await _db.Mokinys.FindAsync(id);
+            Klase = await _db.Klase.FindAsync(Mokinys.fk_Klase);
+
+            Mokytojas = await _db.Mokytojas
+                .Include(i=>i.Dalykas).ToListAsync();
+            Namu_Darbas = await _db.Namu_Darbas.Where(m => m.fk_Klase == Klase.Id_Klase).ToListAsync();
         }
     }
 }
