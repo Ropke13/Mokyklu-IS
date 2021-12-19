@@ -38,13 +38,13 @@
         <div style="text-align:left" class="container">
 
             <label for="ivertis"><b>Įvertinimas</b></label><br>
-            <input asp-for="Pazimys.Ivertis" type="number" placeholder="" name="ivertis" id="ivertis" required><br><br>
+            <input asp-for="Pazimys.Ivertis" type="number" placeholder="" required><br><br>
 
             <label for="uz_ka"><b>Priežastis</b></label><br>
-            <input asp-for="Pazimys.Vertinimo_priezastis" type="text" placeholder="" name="uz" id="uz" required><br><br>
+            <input asp-for="Pazimys.Vertinimo_priezastis" type="text" placeholder="" required><br><br>
 
             <label for="koment"><b>Komentaras</b></label><br>
-            <input asp-for="Pazimys.Komentaras" type="text" placeholder="" name="kom" id="kom" required><br><br>
+            <input asp-for="Pazimys.Komentaras" type="text" placeholder="" required><br><br>
 
             <label for="test"><b>Atsiskaitymas</b></label><br>
             <select class="custom-select" style="width:200px;" name="test" id="test">
@@ -55,7 +55,7 @@
                 }
             </select>
 
-            <button asp-page-handler="Submit" type="submit" class="registerbtn">Įrašyti Pažymi</button>
+            <button asp-page-handler="Submit" asp-route-id="@Model.ID" type="submit" class="registerbtn">Įrašyti Pažymi</button>
         </div><br /><br />
     </form>
 </div>

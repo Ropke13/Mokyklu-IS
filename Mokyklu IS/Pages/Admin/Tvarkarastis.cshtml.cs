@@ -4,13 +4,55 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
+using Mokyklu_IS.Model;
 
 namespace Mokyklu_IS.Pages.Admin
 {
     public class TvarkarastisModel : PageModel
     {
-        public void OnGet()
+        private readonly ApplicationDbContext _db;
+
+        public TvarkarastisModel(ApplicationDbContext db)
         {
+            _db = db;
+        }
+
+        public IEnumerable<Klase> Klase { get; set; }
+        [BindProperty]
+        public Tvarkarastis Tvarkarastis { get; set; }
+        public IEnumerable<Tvarkarastis> Visi { get; set; }
+        public async Task OnGet()
+        {
+            Klase = await _db.Klase.ToListAsync();
+            Visi = await _db.Tvarkarastis.ToListAsync();
+        }
+
+        public async Task<IActionResult> OnPost()
+        {
+            Visi = await _db.Tvarkarastis.ToListAsync();
+            string pamoka = Request.Form["pamoka"];
+            string diena = Request.Form["diena"];
+            string laikas = Request.Form["laikas"];
+            string klase = Request.Form["klase"];
+
+            Tvarkarastis.Pamoka = pamoka;
+            Tvarkarastis.Sav_Diena = diena;
+            Tvarkarastis.Laikas = laikas;
+            Tvarkarastis.Klase = klase;
+            foreach(var item in Visi)
+            {
+                if(item.Klase == klase)
+                {
+                    if(item.Sav_Diena == diena && item.Pamoka == pamoka)
+                    {
+                        return RedirectToPage("/Admin/Index");
+                    }
+                }
+            }
+            await _db.Tvarkarastis.AddAsync(Tvarkarastis);
+            await _db.SaveChangesAsync();
+            return RedirectToPage("/Admin/Tvarkarastis");
         }
     }
 }

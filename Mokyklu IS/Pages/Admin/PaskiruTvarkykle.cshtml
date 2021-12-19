@@ -29,8 +29,8 @@
                                     <td>@Html.DisplayFor(m => item.Asmens_kodas)</td>
                                     <td>@Html.DisplayFor(m => item.Role)</td>
                                     <td>
-                                        <button asp-page-handler="Patvirtinti" asp-route-id="@item.Id_Registracija" class="button1">Patvirtinti</button>
-                                        <button asp-page-handler="Delete" asp-route-id="@item.Id_Registracija" onclick="return confirm('Ar tikrai norite atmesti sia paskyra ?')" class="button2">Atmesti</button>
+                                        <button asp-page-handler="Patvirtinti" asp-route-id="@item.Id_Registracija" class="btn btn-success btn-sm text-white">Patvirtinti</button>
+                                        <button asp-page-handler="Delete" asp-route-id="@item.Id_Registracija" onclick="return confirm('Ar tikrai norite atmesti sia paskyra ?')" class="btn btn-danger btn-sm text-white">Atmesti</button>
                                     </td>
                                 </tr>
                             }
@@ -67,7 +67,7 @@
                                 <td>@Html.DisplayFor(m => item.Role)</td>
                                 <td>
                                     <a asp-page="/Admin/Paskyra_Redagavimas" asp-route-id="@item.Id_Registracija" class="btn btn-success btn-sm text-white">Redaguoti</a>
-                                    <button asp-page-handler="Delete" asp-route-id="@item.Id_Registracija" onclick="return confirm('Ar tikrai norite pasalinti sia paskyra ?')" class="button2">Pašalinti</button>
+                                    <button asp-page-handler="Delete" asp-route-id="@item.Id_Registracija" onclick="return confirm('Ar tikrai norite pasalinti sia paskyra ?')" class="btn btn-danger btn-sm text-white">Pašalinti</button>
                                 </td>
                             </tr>
                         }

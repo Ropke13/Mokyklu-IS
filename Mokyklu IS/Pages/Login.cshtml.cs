@@ -25,10 +25,6 @@ namespace Mokyklu_IS.Pages
         public IEnumerable<Administratorius> Admin { get; set; }
         public IEnumerable<Model.Mokinys> Mokinys { get; set; }
 
-        public async Task OnGet()
-        {
-        }
-
         public async Task<IActionResult> OnPost()
         {
             HttpContext.Session.SetString("id", "");
@@ -83,6 +79,7 @@ namespace Mokyklu_IS.Pages
                             {
                                 if (mok.fk_Registracija == id)
                                 {
+                                    HttpContext.Session.SetString("id", mok.Tabelio_nr.ToString());
                                     return RedirectToPage("/Admin/Index");
                                 }
                             }

@@ -5,44 +5,57 @@
 }
 
 <div class="text-center">
-    <form action="">
+    <form method="post">
         <div class="container">
             <h1>Tvarkaraščio Kūrimas</h1>
 
             <label for="pamoka"><b>Pamoka</b></label><br>
             <select class="custom-select" style="width:200px;" name="pamoka" id="pamoka">
-                <option value="matematika">Matematika</option>
-                <option value="lietuviu">Lietuvių Kalba</option>
-                <option value="anglu">Anglų Kalba</option>
-                <option value="geografija">Geografija</option>
+                <option value="Matematika">Matematika</option>
+                <option value="Lietuviu Kalba">Lietuvių Kalba</option>
+                <option value="Anglu Kalba">Anglų Kalba</option>
+                <option value="Geografija">Geografija</option>
             </select><br><br>
 
             <label for="diena"><b>Savaitės Diena</b></label><br>
             <select class="custom-select" style="width:200px;" name="diena" id="diena">
-                <option value="pirm">Pirmadinis</option>
-                <option value="antr">Antradienis</option>
-                <option value="tre">Trečiadienis</option>
-                <option value="ket">Ketvirtadienis</option>
-                <option value="pen">Penktadienis</option>
+                <option value="Pirmadienis">Pirmadinis</option>
+                <option value="Antradienis">Antradienis</option>
+                <option value="Treciadienis">Trečiadienis</option>
+                <option value="Ketvirtadienis">Ketvirtadienis</option>
+                <option value="Penktadienis">Penktadienis</option>
             </select><br><br>
 
             <label for="laikas"><b>Laikas:</b></label><br>
             <select class="custom-select" style="width:200px;" name="laikas" id="laikas">
-                <option value="laikas1">8:00-8:45</option>
-                <option value="laikas2">8:55-9:40</option>
-                <option value="laikas3">9:50-10:35</option>
-                <option value="laikas4">11:00-11:45</option>
-                <option value="laikas5">12:10-12:55</option>
-                <option value="laikas6">13:05-13:50</option>
-                <option value="laikas7">14:00-14:45</option>
+                <option value="8:00-8:45">8:00-8:45</option>
+                <option value="8:55-9:40">8:55-9:40</option>
+                <option value="9:50-10:35">9:50-10:35</option>
+                <option value="11:00-11:45">11:00-11:45</option>
+                <option value="12:10-12:55">12:10-12:55</option>
+                <option value="13:05-13:50">13:05-13:50</option>
+                <option value="14:00-14:45">14:00-14:45</option>
             </select><br><br>
 
             <label for="klase"><b>Klasė:</b></label><br>
             <select class="custom-select" style="width:200px;" name="klase" id="klase">
-                <option value="def">Klasė</option>
+                @foreach (var tev in Model.Klase)
+                {
+                    <option value="@tev.Id_Klase">@tev.Pavadinimas</option>
+                }
             </select><br><br>
 
             <button type="submit" class="registerbtn">Įrašyti</button>
+
+            @if (ViewData["Message"] != null)
+            {
+                <script type="text/javascript">
+            window.onload = function () {
+                alert("@ViewData["Message"]");
+            };
+                </script>
+            }
+            <h1></h1>
         </div>
     </form>
 </div>

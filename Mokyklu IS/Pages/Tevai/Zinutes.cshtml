@@ -5,16 +5,21 @@
 }
 <div class="text-center">
     <div style="text-align:left" class="container">
-        <label for="gavejas"><b>Gavėjas</b></label><br>
-        <select class="custom-select" style="width:200px;" name="gavejas" id="gavejas">
-                <option value="mokinys">Mokytojas</option>
-        </select><br /><br />
+        <form method="post">
+            <label for="gavejas"><b>Gavėjas</b></label><br>
+            <select class="custom-select" style="width:200px;" name="gavejas" id="gavejas">
+                @foreach (var item in Model.Mokytojas)
+                {
+                    <option value="@item.Asmens_kodas">@item.Vardas @item.Pavarde</option>
+                }
+            </select><br /><br />
 
-        <label for="zinute"><b>Žinutė</b></label><br>
-        <textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>
+            <label for="zinute"><b>Žinutė</b></label><br>
+            <input asp-for="Zinute.Tekstas" type="text" required>
 
-        <button type="submit" class="registerbtn">Siūsti Žinutę</button>
-    </div><br /><br />
+            <button type="submit" class="registerbtn">Siūsti Žinutę</button>
+        </form>
+</div><br /><br />
     <hr>
 
     <div class="container">
@@ -29,10 +34,10 @@
             @foreach (var item in Model.Ats)
             {
                 <tr>
-                    <td></td>
-                    <td>@Html.DisplayFor(m => item.Tekstas)</td>
-                    <td>@Html.DisplayFor(m => item.Data)</td>
+                    <td>@Html.DisplayFor(m => item.Id)</td>
                     <td>@Html.DisplayFor(m => item.MPavarde) @Html.DisplayFor(m => item.MVardas)</td>
+                    <td>@Html.DisplayFor(m => item.Data)</td>
+                    <td>@Html.DisplayFor(m => item.Tekstas)</td>
                 </tr>
             }
         </table><br /><br />

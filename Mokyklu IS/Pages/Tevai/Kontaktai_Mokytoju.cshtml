@@ -12,11 +12,14 @@
                 <th>Pavardė</th>
                 <th>Telefono-Nr</th>
             </tr>
-            <tr>
-                <td>Vytautas</td>
-                <td>Bepavardis</td>
-                <td>112</td>
-            </tr>
+            @foreach (var item in Model.Mokytojas)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.Vardas)</td>
+                    <td>@Html.DisplayFor(m => item.Pavarde)</td>
+                    <td>@Html.DisplayFor(m => item.Telefono_nr)</td>
+                </tr>
+            }
         </table>
     </div>
 </div>

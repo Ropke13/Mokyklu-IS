@@ -18,14 +18,14 @@ namespace Mokyklu_IS.Pages.Tevai
         {
             _db = db;
         }
-        public Tevas Tevas1 { get; set; }
-        public string UserID { get; set; }
-        public Susirinkimas Susirinkimas1 { get; set; }
+        public Tevas Tevas { get; set; }
+        public Susirinkimas Susirinkimas { get; set; }
         public async Task OnGet()
         {
-            UserID = HttpContext.Session.GetString("id");
-            Tevas1 = await _db.Tevas.Where(m => m.Asmens_kodas == UserID).FirstAsync();
-            Susirinkimas1 = await _db.Susirinkimas.Where(m => m.Id_Susirinkimas == Tevas1.fk_Susirinkimas).FirstAsync();
+            string UserID = HttpContext.Session.GetString("id");
+
+            Tevas = await _db.Tevas.FindAsync(UserID);
+            Susirinkimas = await _db.Susirinkimas.Where(m => m.Id_Susirinkimas == Tevas.fk_Susirinkimas).FirstAsync();
         }
     }
 }

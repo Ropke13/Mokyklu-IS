@@ -23,6 +23,8 @@ namespace Mokyklu_IS.Pages.Mokytojas
         {
             public string atsiskaitymas { get; set; }
         }
+        [BindProperty]
+        public string ID { get; set; }
 
         [BindProperty]
         public Pazimys Pazimys { get; set; }
@@ -36,13 +38,15 @@ namespace Mokyklu_IS.Pages.Mokytojas
 
         public async Task OnGet(string id)
         {
+            ID = id;
             if (HttpContext.Session.GetString("id") == null)
             {
-                Redirect("/Mokytojas/Index");   //Neveikia, nzn kaip padaryt kad veiktu
+                Response.Redirect("Login");   //Neveikia, nzn kaip padaryt kad veiktu
+                //Nepavyko ir man su situo.
             }
             Pazimiai = await _db.Pazimys.Where(m => m.fk_Mokinys == id).ToListAsync();
             Mokinys = await _db.Mokinys.FindAsync(id);
-            //Sesija dingsta tai neranda atsisakitymu po post metodo
+            //Dingdavo id, nes po OnPost metodo mes redirectinom i tapati puslapi be id, fixed, apacioj.
             Atsiskaitymai = await _db.Atsiskaitymas.Where(m => m.fk_Mokytojas == HttpContext.Session.GetString("id") && m.fk_Klase == Mokinys.fk_Klase).ToListAsync();
             Ats = from ats in Atsiskaitymai
                   join paz in Pazimiai on ats.Id_Atsiskaitymas equals paz.fk_Atsiskaitymas
@@ -58,17 +62,18 @@ namespace Mokyklu_IS.Pages.Mokytojas
 
         public async Task<IActionResult> OnPostSubmit(string id)
         {
-            //Nepaima nei priezasties, nei komentaro, nei mokinio, nzn kodel, kitus laukus paima
+            //Dabar jau viska paima, ka pakeiciau papasakosiu balsu nes tng rasyt xd
             int ats = int.Parse(Request.Form["test"]);
             if(ats != 0)
             {
                 Pazimys.fk_Atsiskaitymas = ats;
             }
             Pazimys.fk_Mokytojas = HttpContext.Session.GetString("id");
-            Pazimys.fk_Mokinys = id;
+            Pazimys.fk_Mokinys = ID;
             await _db.Pazimys.AddAsync(Pazimys);
             await _db.SaveChangesAsync();
-            return RedirectToPage("/Mokytojas/Pazimys");
+
+            return RedirectToPage("/Mokytojas/Pazimys", new { ID = id});
         }
     }
 }

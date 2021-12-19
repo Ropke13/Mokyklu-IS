@@ -11,9 +11,9 @@ namespace Mokyklu_IS.Pages.Mokinys
 {
     public class IndexModel : PageModel
     {
-        public async Task OnGet(string ID)
+        public void OnGet()
         {
-
+ 
         }
     }
 }
