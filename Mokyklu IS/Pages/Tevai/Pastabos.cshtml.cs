@@ -31,15 +31,24 @@ namespace Mokyklu_IS.Pages.Tevai
             public string MPavarde { get; set; }
         }
 
-        public async Task OnGet(string ID)
+        public async Task<IActionResult> OnGet(string ID)
         {
+            if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            else if (HttpContext.Session.GetString("role") != "Tevas")
+            {
+                return RedirectToPage("/Login");
+            }
+
             Mokinys = await _db.Mokinys.FindAsync(ID);
-            //UserID = HttpContext.Session.GetString("id");
-            //Pastaba = await _db.Pastaba.Where(m => m.fk_Mokinys == ID).ToListAsync();
-            //Mokytojas = await _db.Mokytojas.Where(m => m.Asmens_kodas == Pastaba.fk_).ToListAsync();
+
             var mokytojai = await _db.Mokytojas.ToListAsync();
             var pastabos = await _db.Pastaba.Where(m => m.fk_Mokinys == ID).ToListAsync();
             Ats = from mok in mokytojai join pas in pastabos on mok.Asmens_kodas equals pas.fk_Mokytojas select new PasM{ Tekstas = pas.Tekstas, Data = pas.Data, MVardas = mok.Vardas, MPavarde = mok.Pavarde };
+
+            return Page();
         }
     }
 }

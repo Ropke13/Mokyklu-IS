@@ -21,9 +21,20 @@ namespace Mokyklu_IS.Pages.Tevai
         [BindProperty]
         public Model.Mokinys Mokinys { get; set; }
 
-        public async Task OnGet(string ID)
+        public async Task<IActionResult> OnGet(string ID)
         {
+            if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            else if (HttpContext.Session.GetString("role") != "Tevas")
+            {
+                return RedirectToPage("/Login");
+            }
+
             Mokinys = await _db.Mokinys.FindAsync(ID);
+
+            return Page();
         }
     }
 }

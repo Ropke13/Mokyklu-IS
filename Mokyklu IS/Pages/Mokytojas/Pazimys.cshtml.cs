@@ -36,14 +36,19 @@ namespace Mokyklu_IS.Pages.Mokytojas
         [BindProperty]
         public Model.Mokinys Mokinys { get; set; }
 
-        public async Task OnGet(string id)
+        public async Task<IActionResult> OnGet(string id)
         {
-            ID = id;
             if (HttpContext.Session.GetString("id") == null)
             {
-                Response.Redirect("Login");   //Neveikia, nzn kaip padaryt kad veiktu
-                //Nepavyko ir man su situo.
+                return RedirectToPage("/Login");
             }
+            else if (HttpContext.Session.GetString("role") != "Mokytojas")
+            {
+                return RedirectToPage("/Login");
+            }
+
+            ID = id;
+
             Pazimiai = await _db.Pazimys.Where(m => m.fk_Mokinys == id).ToListAsync();
             Mokinys = await _db.Mokinys.FindAsync(id);
             //Dingdavo id, nes po OnPost metodo mes redirectinom i tapati puslapi be id, fixed, apacioj.
@@ -58,6 +63,8 @@ namespace Mokyklu_IS.Pages.Mokytojas
                       Komentaras = paz.Komentaras,
                       atsiskaitymas = ats.Tema
                   };
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPostSubmit(string id)

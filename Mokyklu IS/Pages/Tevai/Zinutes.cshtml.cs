@@ -33,14 +33,25 @@ namespace Mokyklu_IS.Pages.Tevai
             public string MVardas { get; set; }
             public string MPavarde { get; set; }
         }
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            else if (HttpContext.Session.GetString("role") != "Tevas")
+            {
+                return RedirectToPage("/Login");
+            }
+
             Mokytojas = await _db.Mokytojas.ToListAsync();
             UserID = HttpContext.Session.GetString("id");
             var mokytojai = await _db.Mokytojas.ToListAsync();
             var zinutes = await _db.Zinutes.Where(m => m.fk_Tevas == UserID).ToListAsync();
             Ats = from zin in zinutes join mok in mokytojai on zin.fk_Mokytojas equals mok.Asmens_kodas select new 
                   Zin { Id = zin.Id_Zinutes, Tekstas = zin.Tekstas, Data = zin.Data, MVardas = mok.Vardas, MPavarde = mok.Pavarde };
+
+            return Page();
         }
 
         public async Task<IActionResult> OnPost()

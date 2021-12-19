@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -20,10 +21,21 @@ namespace Mokyklu_IS.Pages.Admin
 
         public IEnumerable<Model.Mokinys> Mokinys { get; set; }
         public IEnumerable<Klase> Klase { get; set; }
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            else if (HttpContext.Session.GetString("role") != "Administratorius")
+            {
+                return RedirectToPage("/Login");
+            }
+
             Mokinys = await _db.Mokinys.ToListAsync();
             Klase = await _db.Klase.ToListAsync();
+
+            return Page();
         }
         public async Task<IActionResult> OnPostPatvirtinti(string id)
         {
@@ -37,7 +49,7 @@ namespace Mokyklu_IS.Pages.Admin
 
             if (number != "NULL")
             {
-                var klas = await _db.Klase.FindAsync(number);
+                var klas = await _db.Klase.FindAsync(int.Parse(number));
                 var mok = await _db.Mokinys.FindAsync(id);
 
                 mok.fk_Klase = klas.Id_Klase;

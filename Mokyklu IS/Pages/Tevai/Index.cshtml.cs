@@ -24,10 +24,21 @@ namespace Mokyklu_IS.Pages.Tevai
         public string UserID { get; set; }
         public IEnumerable<Model.Mokinys> Vaikai { get; set; }
 
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            else if (HttpContext.Session.GetString("role") != "Tevas")
+            {
+                return RedirectToPage("/Login");
+            }
+
             UserID = HttpContext.Session.GetString("id");
             Vaikai = await _db.Mokinys.Where(m => m.fk_Tevas == UserID).ToListAsync();
+
+            return Page();
         }
     }
 }

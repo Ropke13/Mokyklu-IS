@@ -19,10 +19,18 @@ namespace Mokyklu_IS.Pages.Admin
         }
         public int tabelis { get; set; }
         public Administratorius Admin { get; set; }
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            else if (HttpContext.Session.GetString("role") != "Administratorius"){
+                return RedirectToPage("/Login");
+            }
             tabelis = int.Parse(HttpContext.Session.GetString("id"));
             Admin = await _db.Administratorius.FindAsync(tabelis);
+            return Page();
         }
     }
 }

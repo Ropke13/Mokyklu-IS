@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
 using System;
@@ -19,7 +20,7 @@ namespace Mokyklu_IS.Pages
 
         public void OnGet()
         {
-
+            HttpContext.Session.Clear();
         }
     }
 }

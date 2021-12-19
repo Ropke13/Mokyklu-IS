@@ -49,6 +49,7 @@ namespace Mokyklu_IS.Pages
                                 if (mok.fk_Registracija == id && item.Ar_patvirtinta == true)
                                 {
                                     HttpContext.Session.SetString("id", mok.Asmens_kodas);
+                                    HttpContext.Session.SetString("role", role);
                                     return RedirectToPage("/Mokinys/Index");
                                 }
                             }
@@ -59,6 +60,7 @@ namespace Mokyklu_IS.Pages
                                 if (mok.fk_Registracija == id && item.Ar_patvirtinta == true)
                                 {
                                     HttpContext.Session.SetString("id", mok.Asmens_kodas);
+                                    HttpContext.Session.SetString("role", role);
                                     return RedirectToPage("/Mokytojas/Index");
                                 }
                             }
@@ -69,6 +71,7 @@ namespace Mokyklu_IS.Pages
                                 if (mok.fk_Registracija == id && item.Ar_patvirtinta == true)
                                 {
                                     HttpContext.Session.SetString("id", mok.Asmens_kodas);
+                                    HttpContext.Session.SetString("role", role);
                                     return RedirectToPage("/Tevai/Index");
                                 }
 
@@ -80,6 +83,7 @@ namespace Mokyklu_IS.Pages
                                 if (mok.fk_Registracija == id)
                                 {
                                     HttpContext.Session.SetString("id", mok.Tabelio_nr.ToString());
+                                    HttpContext.Session.SetString("role", role);
                                     return RedirectToPage("/Admin/Index");
                                 }
                             }

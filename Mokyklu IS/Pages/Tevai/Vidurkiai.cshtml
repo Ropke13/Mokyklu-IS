@@ -5,20 +5,37 @@
 }
 <div class="text-center">
     <div class="container">
-        <h3 class="display-4">Vaiko Vidurkiai</h3>
-        <table id="customers">
-            <tr>
-                <th>Dalykas</th>
-                <th>Vidurkis</th>
-            </tr>
-            <tr>
-                <td>Matematika</td>
-                <td>9</td>
-            </tr>
-            <tr>
-                <td>Lietuvių k.</td>
-                <td>10</td>
-            </tr>
-        </table>
+        <h3 class="display-4">Vaiku Vidurkiai</h3>
+        @foreach (var item in Model.Mokiniai)
+        {
+            <h3 class="display-4">@Html.DisplayFor(m => item.Vardas)</h3>
+            <table id="customers">
+                <tr>
+                    <th>Dalykas</th>
+                    <th>Vidurkis</th>
+                </tr>
+                @foreach (var dal in Model.Dalykas)
+                {
+                    int vidurkis = 0;
+                    int count = 0;
+                    @foreach (var item1 in Model.Pazimys)
+                    {
+                        @if (item1.fk_Mokinys == item.Asmens_kodas && item1.Mokytojas.Dalykas.Pavadinimas == dal.Pavadinimas)
+                        {
+                            vidurkis += item1.Ivertis;
+                            count++;
+                        }
+                    }
+                    @if (count != 0)
+                    {
+                        vidurkis = vidurkis / count;
+                        <tr>
+                            <td>@Html.DisplayFor(v => dal.Pavadinimas) </td>
+                            <td>@vidurkis</td>
+                        </tr>
+                    }
+                }
+            </table>
+        }
     </div>
 </div>

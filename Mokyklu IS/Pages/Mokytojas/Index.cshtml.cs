@@ -25,8 +25,17 @@ namespace Mokyklu_IS.Pages.Mokytojas
         public IEnumerable<Klase> Ats { get; set; }
         public IEnumerable<Destymas> Destymai { get; set; }
 
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            else if (HttpContext.Session.GetString("role") != "Mokytojas")
+            {
+                return RedirectToPage("/Login");
+            }
+
             UserID = HttpContext.Session.GetString("id");
             Mokytojas = await _db.Mokytojas.FindAsync(UserID);
             Destymai = await _db.Destymas.Where(m => m.fk_Mokytojas==UserID).ToListAsync();
@@ -36,6 +45,8 @@ namespace Mokyklu_IS.Pages.Mokytojas
             var mokytojai = await _db.Mokytojas.ToListAsync();
             var pastabos = await _db.Pastaba.ToListAsync();
             var ats = from mok in mokytojai join pas in pastabos on mok.Asmens_kodas equals pas.fk_Mokytojas select new { Tekstas = pas.Tekstas, Data = pas.Data, MVardas = mok.Vardas, MPavarde = mok.Pavarde };
+
+            return Page();
         }
     }
 }

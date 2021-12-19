@@ -20,12 +20,23 @@ namespace Mokyklu_IS.Pages.Tevai
         }
         public Tevas Tevas { get; set; }
         public Susirinkimas Susirinkimas { get; set; }
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            else if (HttpContext.Session.GetString("role") != "Tevas")
+            {
+                return RedirectToPage("/Login");
+            }
+
             string UserID = HttpContext.Session.GetString("id");
 
             Tevas = await _db.Tevas.FindAsync(UserID);
             Susirinkimas = await _db.Susirinkimas.Where(m => m.Id_Susirinkimas == Tevas.fk_Susirinkimas).FirstAsync();
+
+            return Page();
         }
     }
 }

@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -23,12 +24,23 @@ namespace Mokyklu_IS.Pages.Admin
         public IEnumerable<Destymas> Destymas { get; set; }
         public IEnumerable<Klase> Klase { get; set; }
 
-        public async Task OnGet(string ID)
+        public async Task<IActionResult> OnGet(string ID)
         {
+            if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            else if (HttpContext.Session.GetString("role") != "Administratorius")
+            {
+                return RedirectToPage("/Login");
+            }
+
             Mokytojas = await _db.Mokytojas.FindAsync(ID);
             Destymas = await _db.Destymas.ToListAsync();
             MokinysL = await _db.Mokinys.ToListAsync();
             Klase = await _db.Klase.ToListAsync();
+
+            return Page();
         }
     }
 }

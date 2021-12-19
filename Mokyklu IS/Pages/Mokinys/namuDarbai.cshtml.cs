@@ -23,8 +23,17 @@ namespace Mokyklu_IS.Pages.Mokinys
         public Klase Klase { get; set; }
         public IEnumerable<Namu_Darbas> Namu_Darbas { get; set; }
         public IEnumerable<Model.Mokytojas> Mokytojas { get; set; }
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            else if (HttpContext.Session.GetString("role") != "Mokinys")
+            {
+                return RedirectToPage("/Login");
+            }
+
             id = HttpContext.Session.GetString("id");
 
             Mokinys = await _db.Mokinys.FindAsync(id);
@@ -33,6 +42,8 @@ namespace Mokyklu_IS.Pages.Mokinys
             Mokytojas = await _db.Mokytojas
                 .Include(i=>i.Dalykas).ToListAsync();
             Namu_Darbas = await _db.Namu_Darbas.Where(m => m.fk_Klase == Klase.Id_Klase).ToListAsync();
+
+            return Page();
         }
     }
 }

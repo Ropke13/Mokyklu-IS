@@ -22,12 +22,23 @@ namespace Mokyklu_IS.Pages.Mokinys
         public Model.Mokinys Mokinys { get; set; }
         public Klase Klase { get; set; }
         public IEnumerable<Tvarkarastis> Tvarkarastis { get; set; }
-        public async Task OnGet()
+        public async Task<IActionResult> OnGet()
         {
+            if (HttpContext.Session.GetString("id") == null)
+            {
+                return RedirectToPage("/Login");
+            }
+            else if (HttpContext.Session.GetString("role") != "Mokinys")
+            {
+                return RedirectToPage("/Login");
+            }
+
             id = HttpContext.Session.GetString("id");
             Mokinys = await _db.Mokinys.FindAsync(id);
             Klase = await _db.Klase.FindAsync(Mokinys.fk_Klase);
             Tvarkarastis = await _db.Tvarkarastis.ToListAsync();
+
+            return Page();
         }
     }
 }
