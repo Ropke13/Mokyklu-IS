@@ -23,7 +23,7 @@ namespace Mokyklu_IS.Model
 
         [ForeignKey("fk_Tevas")]
         public Tevas Tevas { get; set; }
-        public string? fk_Tevas { get; set; }
+        public string fk_Tevas { get; set; }
 
         [ForeignKey("fk_Klase")]
         public Klase Klase { get; set; }

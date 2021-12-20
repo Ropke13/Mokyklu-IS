@@ -12,6 +12,14 @@ namespace Mokyklu_IS.Pages.Mokinys
 {
     public class IndexModel : PageModel
     {
+        private readonly ApplicationDbContext _db;
+
+        public IndexModel(ApplicationDbContext db)
+        {
+            _db = db;
+        }
+
+        public Model.Mokinys Mokinys { get; set; }
         public async Task<IActionResult> OnGet()
         {
             if (HttpContext.Session.GetString("id") == null)
@@ -22,6 +30,8 @@ namespace Mokyklu_IS.Pages.Mokinys
             {
                 return RedirectToPage("/Login");
             }
+
+            Mokinys = await _db.Mokinys.FindAsync(HttpContext.Session.GetString("id"));
             return Page();
         }
     }

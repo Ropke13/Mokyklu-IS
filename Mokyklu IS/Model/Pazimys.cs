@@ -18,7 +18,7 @@ namespace Mokyklu_IS.Model
 
         [ForeignKey("fk_Mokytojas")]
         public Mokytojas Mokytojas { get; set; }
-        public string? fk_Mokytojas { get; set; }
+        public string fk_Mokytojas { get; set; }
 
         [ForeignKey("fk_Atsiskaitymas")]
         public Atsiskaitymas Atsiskaitymas { get; set; }
@@ -26,6 +26,6 @@ namespace Mokyklu_IS.Model
 
         [ForeignKey("fk_Mokinys")]
         public Mokinys Mokinys { get; set; }
-        public string? fk_Mokinys { get; set; }
+        public string fk_Mokinys { get; set; }
     }
 }

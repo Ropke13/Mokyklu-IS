@@ -11,7 +11,6 @@ namespace Mokyklu_IS.Pages
 {
     public class RegistrationModel : PageModel
     {
-        //private readonly ILogger<RegistrationModel> _logger;
         private readonly ApplicationDbContext _db;
 
         public RegistrationModel(ApplicationDbContext db)
@@ -21,12 +20,6 @@ namespace Mokyklu_IS.Pages
 
         [BindProperty]
         public Registracija Registracija { get; set; }
-
-        //public RegistrationModel(ILogger<RegistrationModel> logger)
-        //{
-        //    _logger = logger;
-        //}
-
 
         public void OnGet()
         {

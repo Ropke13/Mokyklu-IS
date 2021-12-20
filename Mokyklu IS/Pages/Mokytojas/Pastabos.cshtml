@@ -13,25 +13,27 @@
                 <th>Data</th>
                 <th></th>
             </tr>
-            <tr>
-                <td>Mokinys nesiklauso pamokos</td>
-                <td>2021-11-7</td>
-                <td>
-                <form style="display: inline" asp-area="" asp-page="/Mokytojas/Pastabos_Edit" method="get">
-                        <button class="button1">Redag</button>
-                </form>
-                </td>
-            </tr>
+            @foreach (var item in Model.Pastaba)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.Tekstas)</td>
+                    <td>@Html.DisplayFor(m => item.Data)</td>
+                    <td>
+                        <a asp-page="/Mokytojas/Pastabos_Edit" asp-route-id="@item.Id_Pastaba @Model.ID" class="btn btn-success btn-sm text-white">Redaguoti</a>
+                    </td>
+                </tr>
+            }
         </table>
     </div>
     <hr>
     <h3 class="display-4">Įrašyti naują pastabą</h3>
 
     <div style="text-align:left" class="container">
+        <form method="post">
+            <label for="pastaba"><b>Pastaba</b></label><br>
+            <textarea asp-for="Nauja.Tekstas" type="text" placeholder="Pastaba" required></textarea>
 
-        <label for="pastaba"><b>Pastaba</b></label><br>
-        <textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>
-
-        <button type="submit" class="registerbtn">Įrašyti pastaba</button>
+            <button type="submit" class="registerbtn">Įrašyti pastaba</button>
+        </form>
     </div><br /><br />
 </div>

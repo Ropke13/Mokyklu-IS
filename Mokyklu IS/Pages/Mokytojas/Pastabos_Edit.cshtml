@@ -5,10 +5,12 @@
 }
 <div>
     <div style="text-align:left" class="container">
-        <label for="pastaba"><b>Pastaba</b></label><br>
-        <textarea id="w3review" name="w3review" rows="4" cols="50"></textarea>
+        <form method="post">
+            <input type="hidden" asp-for="Nauja.Id_Pastaba" />
+            <label for="pastaba"><b>Pastaba</b></label><br>
+            <textarea asp-for="Nauja.Tekstas" type="text" placeholder="Pastaba" required></textarea>
 
-        <button type="submit" class="registerbtn">Redaguoti</button>
-
+            <button type="submit" class="registerbtn">Redaguoti</button>
+        </form>
     </div>
 </div>

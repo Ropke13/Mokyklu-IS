@@ -13,39 +13,32 @@
                 <th>Data</th>
                 <th></th>
             </tr>
-            <tr>
-                <td>Aukštesniųjų eilių diferencialinės lygtys</td>
-                <td>Išspresti visas lygtis is duoto lapo</td>
-                <td>2021-12-12</td>
-                <td>
-                    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Namu_Darbai_Edit" method="get">
-                        <button class="registerbtn">Redaguoti</button>
-                    </form>
-                </td>
-            </tr>
-            <tr>
-                <td>Kokia gyvenimo prasme ?</td>
-                <td>Parasyti savo nuomone</td>
-                <td>2021-12-14</td>
-                <td>
-                    <form style="display: inline" asp-area="" asp-page="/Mokytojas/Namu_Darbai_Edit" method="get">
-                        <button class="registerbtn">Redaguoti</button>
-                    </form>
-                </td>
-            </tr>
+            @foreach (var item in Model.ND)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.Tema)</td>
+                    <td>@Html.DisplayFor(m => item.Uzduotis)</td>
+                    <td>@Html.DisplayFor(m => item.Data.Date)</td>
+                    <td>
+                        <a asp-page="/Mokytojas/Namu_Darbai_Edit" asp-route-id="@item.Id_Namu_darbas @Model.ID" class="btn btn-success btn-sm text-white">Redaguoti</a>
+                    </td>
+                </tr>
+            }
         </table>
     </div>
     <hr>
     <div style="text-align:center" class="container">
-        <label for="tema"><b>Tema</b></label><br>
-        <input type="text" placeholder="tema" name="tema" id="tema" required><br><br>
+        <form method="post">
+            <label for="tema"><b>Tema</b></label><br>
+            <input asp-for="Nauja.Tema" type="text" placeholder="tema" required><br><br>
 
-        <label for="uzduotis"><b>Užduotis</b></label><br>
-        <input type="text" placeholder="užduotis" name="uzduotis" id="uzduotis" required><br><br>
+            <label for="uzduotis"><b>Užduotis</b></label><br>
+            <input asp-for="Nauja.Uzduotis" type="text" placeholder="užduotis" required><br><br>
 
-        <label for="data"><b>Data</b></label><br>
-        <input type="text" placeholder="Data" name="data" id="data" required><br><br>
+            <label for="data"><b>Data</b></label><br>
+            <input asp-for="Nauja.Data" type="date" placeholder="Data" required><br><br>
 
-        <button type="submit" class="registerbtn">Įrašyti Namų Darbus</button>
+            <button type="submit" class="registerbtn">Įrašyti Namų Darbus</button>
+        </form>
     </div>
 </div>

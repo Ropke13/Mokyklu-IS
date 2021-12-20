@@ -1,20 +1,20 @@
 ﻿@page
-@model Mokyklu_IS.Pages.Mokytojas.Namu_Darbai_EditModel
+@model Mokyklu_IS.Pages.Mokytojas.Atsiskaitymas_EditModel
 @{
     Layout = "/Pages/Shared/_MokytojasLayout.cshtml";
 }
 <div>
     <div style="text-align:left" class="container">
         <form method="post">
-            <input type="hidden" asp-for="ND.Id_Namu_darbas" />
+            <input type="hidden" asp-for="Atsiskaitymas.Id_Atsiskaitymas" />
             <label for="tema"><b>Tema</b></label><br>
-            <input asp-for="ND.Tema" type="text" placeholder="tema" required><br><br>
+            <input asp-for="Atsiskaitymas.Tema" type="text" placeholder="tema" required><br><br>
 
             <label for="uzduotis"><b>Užduotis</b></label><br>
-            <input asp-for="ND.Uzduotis" type="text" placeholder="užduotis" required><br><br>
+            <input asp-for="Atsiskaitymas.Data" type="date" placeholder="užduotis" required><br><br>
 
             <label for="data"><b>Data</b></label><br>
-            <input asp-for="ND.Data" type="date" placeholder="Data" required><br><br>
+            <input asp-for="Atsiskaitymas.laikas" type="text" placeholder="Data" required><br><br>
 
             <button type="submit" class="registerbtn">Įrašyti </button>
         </form>

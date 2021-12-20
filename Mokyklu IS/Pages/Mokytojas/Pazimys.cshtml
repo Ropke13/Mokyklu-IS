@@ -26,7 +26,7 @@
                     }
                     <td>@Html.DisplayFor(m => item.atsiskaitymas)</td>
                     <td>
-                        <a asp-page="/Mokytojas/Pazimys_Edit" asp-route-ID="@item.Id_Pazimys" class="button1">Redaguoti</a>
+                        <a asp-page="/Mokytojas/Pazimys_Edit" asp-route-ID="@item.Id_Pazimys @Model.ID" class="button1">Redaguoti</a>
                     </td>
                 }
             </tr>

@@ -9,11 +9,11 @@ using Mokyklu_IS.Model;
 
 namespace Mokyklu_IS.Pages.Mokytojas
 {
-    public class Namu_Darbai_EditModel : PageModel
+    public class Atsiskaitymas_EditModel : PageModel
     {
         private ApplicationDbContext _db;
 
-        public Namu_Darbai_EditModel(ApplicationDbContext db)
+        public Atsiskaitymas_EditModel(ApplicationDbContext db)
         {
             _db = db;
         }
@@ -21,7 +21,7 @@ namespace Mokyklu_IS.Pages.Mokytojas
         [BindProperty]
         public string line { get; set; }
         [BindProperty]
-        public Namu_Darbas ND { get; set; }
+        public Atsiskaitymas Atsiskaitymas { get; set; }
         public async Task<IActionResult> OnGet(string id)
         {
             if (HttpContext.Session.GetString("id") == null)
@@ -35,7 +35,7 @@ namespace Mokyklu_IS.Pages.Mokytojas
             line = id;
             string[] Data = line.Split(' ');
 
-            ND = await _db.Namu_Darbas.FindAsync(int.Parse(Data[0]));
+            Atsiskaitymas = await _db.Atsiskaitymas.FindAsync(int.Parse(Data[0]));
 
             return Page();
         }
@@ -44,14 +44,14 @@ namespace Mokyklu_IS.Pages.Mokytojas
             line = id;
             string[] Data = line.Split(' ');
 
-            var ndFromDb = await _db.Namu_Darbas.FindAsync(ND.Id_Namu_darbas);
-            ndFromDb.Tema = ND.Tema;
-            ndFromDb.Uzduotis = ND.Uzduotis;
-            ndFromDb.Data = ND.Data;
+            var ndFromDb = await _db.Atsiskaitymas.FindAsync(Atsiskaitymas.Id_Atsiskaitymas);
+            ndFromDb.Tema = Atsiskaitymas.Tema;
+            ndFromDb.laikas = Atsiskaitymas.laikas;
+            ndFromDb.Data = Atsiskaitymas.Data;
 
             await _db.SaveChangesAsync();
 
-            return RedirectToPage("/Mokytojas/Namu_Darbai", new { ID = int.Parse(Data[1]) });
+            return RedirectToPage("/Mokytojas/Atsiskaitymai", new { ID = int.Parse(Data[1]) });
         }
     }
 }
