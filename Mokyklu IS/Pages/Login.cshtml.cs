@@ -18,7 +18,7 @@ namespace Mokyklu_IS.Pages
         {
             _db = db;
         }
-
+        public string Error { get; set; }
         public IEnumerable<Registracija> Registracija { get; set; }
         public IEnumerable<Model.Mokytojas> Mokytojas { get; set; }
         public IEnumerable<Tevas> Tevas { get; set; }
@@ -39,6 +39,11 @@ namespace Mokyklu_IS.Pages
             {
                 if(item.Prisijungimo_vardas == pris_vard && item.Slaptazodis == password)
                 {
+                    if(item.Ar_patvirtinta == false)
+                    {
+                        Error = "Jusu paskyra dar nepatvirtinta";
+                        return Page();
+                    }
                     int id = item.Id_Registracija;
                     var role = item.Role;
                     switch (role)
@@ -91,7 +96,8 @@ namespace Mokyklu_IS.Pages
                     }
                 }
             }
-            return RedirectToPage("Login");
+            Error = "Ivestas neteisingas slaptazodis arba prisijungimo vardas";
+            return Page();
 
         }
     }

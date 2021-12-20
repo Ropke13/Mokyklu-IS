@@ -14,22 +14,38 @@
                 <th>Atsiskaitymas</th>
                 <th></th>
             </tr>
-            <tr>
-                @foreach (var item in Model.Ats)
-                {
-                    <td>@Html.DisplayFor(m => item.Ivertis)</td>
-                    <td>@Html.DisplayFor(m => item.Vertinimo_priezastis)</td>
-                    <td>@Html.DisplayFor(m => item.Komentaras)</td>
-                    @if (item.atsiskaitymas == "")
+            @foreach (var item in Model.Pazimiai)
+            {
+                    @foreach (var item2 in Model.Atsiskaitymai)
                     {
-                        item.atsiskaitymas = "-";
+                        @if (item.fk_Atsiskaitymas == null)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.Ivertis)</td>
+                                <td>@Html.DisplayFor(m => item.Vertinimo_priezastis)</td>
+                                <td>@Html.DisplayFor(m => item.Komentaras)</td>
+                                <td>-</td>
+                                <td>
+                                    <a asp-page="/Mokytojas/Pazimys_Edit" asp-route-ID="@item.Id_Pazimys @Model.ID" class="button1">Redaguoti</a>
+                                </td>
+                            </tr>
+                            break;
+                        }
+                        if (item.fk_Atsiskaitymas != null && item.fk_Atsiskaitymas == item2.Id_Atsiskaitymas)
+                        {
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.Ivertis)</td>
+                                <td>@Html.DisplayFor(m => item.Vertinimo_priezastis)</td>
+                                <td>@Html.DisplayFor(m => item.Komentaras)</td>
+                                <td>@Html.DisplayFor(m => item2.Tema)</td>
+
+                                <td>
+                                    <a asp-page="/Mokytojas/Pazimys_Edit" asp-route-ID="@item.Id_Pazimys @Model.ID" class="button1">Redaguoti</a>
+                                </td>
+                            </tr>
+                        }
                     }
-                    <td>@Html.DisplayFor(m => item.atsiskaitymas)</td>
-                    <td>
-                        <a asp-page="/Mokytojas/Pazimys_Edit" asp-route-ID="@item.Id_Pazimys @Model.ID" class="button1">Redaguoti</a>
-                    </td>
-                }
-            </tr>
+            }
         </table>
     </div>
     <hr>

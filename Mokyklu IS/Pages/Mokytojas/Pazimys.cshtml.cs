@@ -51,7 +51,6 @@ namespace Mokyklu_IS.Pages.Mokytojas
 
             Pazimiai = await _db.Pazimys.Where(m => m.fk_Mokinys == id).ToListAsync();
             Mokinys = await _db.Mokinys.FindAsync(id);
-            //Dingdavo id, nes po OnPost metodo mes redirectinom i tapati puslapi be id, fixed, apacioj.
             Atsiskaitymai = await _db.Atsiskaitymas.Where(m => m.fk_Mokytojas == HttpContext.Session.GetString("id") && m.fk_Klase == Mokinys.fk_Klase).ToListAsync();
             Ats = from ats in Atsiskaitymai
                   join paz in Pazimiai on ats.Id_Atsiskaitymas equals paz.fk_Atsiskaitymas
@@ -69,7 +68,6 @@ namespace Mokyklu_IS.Pages.Mokytojas
 
         public async Task<IActionResult> OnPostSubmit(string id)
         {
-            //Dabar jau viska paima, ka pakeiciau papasakosiu balsu nes tng rasyt xd
             int ats = int.Parse(Request.Form["test"]);
             if(ats != 0)
             {

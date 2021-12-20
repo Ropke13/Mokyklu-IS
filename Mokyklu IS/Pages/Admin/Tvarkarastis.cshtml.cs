@@ -19,11 +19,13 @@ namespace Mokyklu_IS.Pages.Admin
             _db = db;
         }
 
+        [BindProperty]
+        public string Error { get; set; }
         public IEnumerable<Klase> Klase { get; set; }
         [BindProperty]
         public Tvarkarastis Tvarkarastis { get; set; }
         public IEnumerable<Tvarkarastis> Visi { get; set; }
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGet(string Errorr)
         {
             if (HttpContext.Session.GetString("id") == null)
             {
@@ -33,7 +35,7 @@ namespace Mokyklu_IS.Pages.Admin
             {
                 return RedirectToPage("/Login");
             }
-
+            Error = Errorr;
             Klase = await _db.Klase.ToListAsync();
             Visi = await _db.Tvarkarastis.ToListAsync();
 
@@ -56,9 +58,10 @@ namespace Mokyklu_IS.Pages.Admin
             {
                 if(item.Klase == klase)
                 {
-                    if(item.Sav_Diena == diena && item.Pamoka == pamoka)
+                    if(item.Sav_Diena == diena && item.Laikas == laikas)
                     {
-                        return RedirectToPage("/Admin/Index");
+                        Error = "Diena ir laikas sutampa, pamokos irasyti negalima";
+                        return RedirectToPage("/Admin/Tvarkarastis", new { Errorr = Error });
                     }
                 }
             }
