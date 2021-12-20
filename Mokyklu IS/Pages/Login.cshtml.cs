@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -41,7 +41,7 @@ namespace Mokyklu_IS.Pages
                 {
                     if(item.Ar_patvirtinta == false)
                     {
-                        Error = "Jusu paskyra dar nepatvirtinta";
+                        Error = "Jūsų paskyra dar nepatvirtinta";
                         return Page();
                     }
                     int id = item.Id_Registracija;
@@ -96,7 +96,7 @@ namespace Mokyklu_IS.Pages
                     }
                 }
             }
-            Error = "Ivestas neteisingas slaptazodis arba prisijungimo vardas";
+            Error = "Įvestas neteisingas slaptažodis arba prisijungimo vardas";
             return Page();
 
         }

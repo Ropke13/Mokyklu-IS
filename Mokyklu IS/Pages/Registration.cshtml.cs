@@ -34,7 +34,7 @@ namespace Mokyklu_IS.Pages
             Registracija.Role = role;
             if(Registracija.Slaptazodis != repeat)
             {
-                Error = "Slaptazodziai nesutampa!";
+                Error = "Slaptažodžiai nesutampa!";
                 return Page();
             }
 

@@ -17,7 +17,7 @@
                 @foreach (var item in Model.Atsiskaitymas)
                 {
                     <tr>
-                        <td>@Html.DisplayFor(m => item.Data)</td>
+                        <td>@Html.DisplayFor(m => item.Data.Year)-@Html.DisplayFor(m => item.Data.Month)-@Html.DisplayFor(m => item.Data.Day)</td>
                         <td>@Html.DisplayFor(m => item.Tema)</td>
                         <td>@Html.DisplayFor(m => item.laikas)</td>
                         <td>
@@ -41,7 +41,7 @@
             <label for="data"><b>Laikas</b></label><br>
             <input asp-for="Nauja.laikas" type="text" placeholder="Laikas" required><br><br>
 
-            <button type="submit" class="registerbtn">Įrašyti Atsiskaityma</button>
+            <button type="submit" class="registerbtn">Įrašyti Atsiskaitymą</button>
         </form>
     </div>
 </div>

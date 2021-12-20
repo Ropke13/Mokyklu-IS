@@ -18,7 +18,7 @@
                 <tr>
                     <td>@Html.DisplayFor(m => item.Tema)</td>
                     <td>@Html.DisplayFor(m => item.Uzduotis)</td>
-                    <td>@Html.DisplayFor(m => item.Data.Date)</td>
+                    <td>@Html.DisplayFor(m => item.Data.Year)-@Html.DisplayFor(m => item.Data.Month)-@Html.DisplayFor(m => item.Data.Day)</td>
                     <td>
                         <a asp-page="/Mokytojas/Namu_Darbai_Edit" asp-route-id="@item.Id_Namu_darbas @Model.ID" class="btn btn-success btn-sm text-white">Redaguoti</a>
                     </td>
