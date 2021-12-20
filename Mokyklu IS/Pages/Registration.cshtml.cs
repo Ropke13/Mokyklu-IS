@@ -17,7 +17,7 @@ namespace Mokyklu_IS.Pages
         {
             _db = db;
         }
-
+        public string Error { get; set; }
         [BindProperty]
         public Registracija Registracija { get; set; }
 
@@ -29,8 +29,14 @@ namespace Mokyklu_IS.Pages
         public async Task<IActionResult> OnPostPatvirtinti()
         {
             string role = Request.Form["role"];
+            string repeat = Request.Form["psw-repeat"];
             Registracija.Ar_patvirtinta = false;
             Registracija.Role = role;
+            if(Registracija.Slaptazodis != repeat)
+            {
+                Error = "Slaptazodziai nesutampa!";
+                return Page();
+            }
 
             await _db.Registracija.AddAsync(Registracija);
             await _db.SaveChangesAsync();

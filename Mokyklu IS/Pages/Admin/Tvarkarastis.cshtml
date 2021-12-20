@@ -43,18 +43,12 @@
                 {
                     <option value="@tev.Id_Klase">@tev.Pavadinimas</option>
                 }
-            </select><br><br>
+            </select><br/>
+            <label for="psw"><b>@Model.Error</b></label><br>
+            <br><br>
 
             <button type="submit" class="registerbtn">Įrašyti</button>
 
-            @if (ViewData["Message"] != null)
-            {
-                <script type="text/javascript">
-            window.onload = function () {
-                alert("@ViewData["Message"]");
-            };
-                </script>
-            }
             <h1></h1>
         </div>
     </form>
