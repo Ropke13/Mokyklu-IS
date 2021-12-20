@@ -52,16 +52,6 @@ namespace Mokyklu_IS.Pages.Mokytojas
             Pazimiai = await _db.Pazimys.Where(m => m.fk_Mokinys == id).ToListAsync();
             Mokinys = await _db.Mokinys.FindAsync(id);
             Atsiskaitymai = await _db.Atsiskaitymas.Where(m => m.fk_Mokytojas == HttpContext.Session.GetString("id") && m.fk_Klase == Mokinys.fk_Klase).ToListAsync();
-            Ats = from ats in Atsiskaitymai
-                  join paz in Pazimiai on ats.Id_Atsiskaitymas equals paz.fk_Atsiskaitymas
-                  select new MPazimys
-                  {
-                      Id_Pazimys = paz.Id_Pazimys,
-                      Ivertis = paz.Ivertis,
-                      Vertinimo_priezastis = paz.Vertinimo_priezastis,
-                      Komentaras = paz.Komentaras,
-                      atsiskaitymas = ats.Tema
-                  };
 
             return Page();
         }
@@ -79,6 +69,21 @@ namespace Mokyklu_IS.Pages.Mokytojas
             await _db.SaveChangesAsync();
 
             return RedirectToPage("/Mokytojas/Pazimys", new { ID = id});
+        }
+        public async Task<IActionResult> OnPostDelete(string id)
+        {
+            string line = id;
+            string[] Data = line.Split(' ');
+
+            var reg = await _db.Pazimys.FindAsync(int.Parse(Data[0]));
+            if (reg == null)
+            {
+                return NotFound();
+            }
+            _db.Pazimys.Remove(reg);
+            await _db.SaveChangesAsync();
+
+            return RedirectToPage("/Mokytojas/Pazimys", new { ID = int.Parse(Data[1]) });
         }
     }
 }

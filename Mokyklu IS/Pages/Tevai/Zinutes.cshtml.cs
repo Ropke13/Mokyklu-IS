@@ -32,6 +32,7 @@ namespace Mokyklu_IS.Pages.Tevai
             public DateTime Data { get; set; }
             public string MVardas { get; set; }
             public string MPavarde { get; set; }
+            public bool persk { get; set; }
         }
         public async Task<IActionResult> OnGet()
         {
@@ -49,7 +50,7 @@ namespace Mokyklu_IS.Pages.Tevai
             var mokytojai = await _db.Mokytojas.ToListAsync();
             var zinutes = await _db.Zinutes.Where(m => m.fk_Tevas == UserID).ToListAsync();
             Ats = from zin in zinutes join mok in mokytojai on zin.fk_Mokytojas equals mok.Asmens_kodas select new 
-                  Zin { Id = zin.Id_Zinutes, Tekstas = zin.Tekstas, Data = zin.Data, MVardas = mok.Vardas, MPavarde = mok.Pavarde };
+                  Zin { Id = zin.Id_Zinutes, Tekstas = zin.Tekstas, Data = zin.Data, MVardas = mok.Vardas, MPavarde = mok.Pavarde, persk = zin.ArPerskaityta };
 
             return Page();
         }
@@ -61,6 +62,7 @@ namespace Mokyklu_IS.Pages.Tevai
             Zinute.fk_Mokytojas = kam;
             Zinute.Data = DateTime.Now;
             Zinute.fk_Tevas = UserID;
+            Zinute.ArPerskaityta = false;
 
             await _db.Zinutes.AddAsync(Zinute);
             await _db.SaveChangesAsync();

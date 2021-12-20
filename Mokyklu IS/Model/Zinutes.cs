@@ -15,6 +15,7 @@ namespace Mokyklu_IS.Model
         public string Tekstas { get; set; }
         [Required]
         public DateTime Data { get; set; }
+        public bool ArPerskaityta { get; set; }
 
         [ForeignKey("fk_Tevas")]
         public Tevas Tevas { get; set; }

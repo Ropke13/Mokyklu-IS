@@ -1,0 +1,25 @@
+﻿@page
+@model Mokyklu_IS.Pages.Mokytojas.ZinutesModel
+@{
+    Layout = "/Pages/Shared/_MokytojasLayout.cshtml";
+}
+<div class="container">
+    <h3 class="display-4">Visos Žinutės</h3>
+    <table id="customers">
+        <tr>
+            <th>Nr</th>
+            <th>Siuntėjas</th>
+            <th>Data</th>
+            <th>Žinutė</th>
+        </tr>
+        @foreach (var item in Model.Zinutes)
+        {
+            <tr>
+                <td>@Html.DisplayFor(m => item.Id_Zinutes)</td>
+                <td>@Html.DisplayFor(m => item.Tevas.Vardas) @Html.DisplayFor(m => item.Tevas.Pavarde)</td>
+                <td>@Html.DisplayFor(m => item.Data)</td>
+                <td>@Html.DisplayFor(m => item.Tekstas)</td>               
+            </tr>
+        }
+    </table><br /><br />
+</div>

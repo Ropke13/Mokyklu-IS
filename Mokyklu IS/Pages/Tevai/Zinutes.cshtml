@@ -27,9 +27,10 @@
         <table id="customers">
             <tr>
                 <th>Nr</th>
-                <th>Siuntėjas</th>
+                <th>Gavėjas</th>
                 <th>Data</th>
                 <th>Žinutė</th>
+                <th>Ar perskaitė</th>
             </tr>
             @foreach (var item in Model.Ats)
             {
@@ -38,6 +39,12 @@
                     <td>@Html.DisplayFor(m => item.MPavarde) @Html.DisplayFor(m => item.MVardas)</td>
                     <td>@Html.DisplayFor(m => item.Data)</td>
                     <td>@Html.DisplayFor(m => item.Tekstas)</td>
+                    @if (item.persk == false)
+                    {
+                        <td>Neperskaityta</td>
+                    }
+                    else
+                    {<td>Perskaityta</td>}
                 </tr>
             }
         </table><br /><br />

@@ -25,7 +25,7 @@ namespace Mokyklu_IS.Pages.Mokytojas
             _db = db;
         }
 
-        public async Task<IActionResult> OnGet()
+        public IActionResult OnGet()
         {
             if (HttpContext.Session.GetString("id") == null)
             {

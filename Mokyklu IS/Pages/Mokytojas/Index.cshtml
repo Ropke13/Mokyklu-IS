@@ -6,15 +6,15 @@
 <div class="text-center">
     <div class="container">
         <h3 class="display-4">Klasės</h3>
-            @if (Model.Klases.Count() > 0)
-            {
-    <table id="customers">
-        <tr>
-            <th>Klasė</th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model.Ats)
+        @if (Model.Klases.Count() > 0)
         {
+            <table id="customers">
+                <tr>
+                    <th>Klasė</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.Ats)
+                {
                     <tr>
                         <td>
                             @Html.DisplayFor(m => item.Pavadinimas)
@@ -23,13 +23,20 @@
                             <a asp-page="/Mokytojas/Klase" asp-route-ID="@item.Id_Klase" class="btn btn-primary m-1">Rinktis</a>
                         </td>
                     </tr>
+                }
+            </table>
         }
-        </table>
-            }
-            else
-            {
-                <p>Duomenų bazėje nėra jokių klasių.</p>
-            }
+        else
+        {
+            <p>Duomenų bazėje nėra jokių klasių.</p>
+        }
+
+        @if (Model.NePerZinutes > 0)
+        {
+            <br />
+            <hr />
+            <label for="psw"><b>Jus turite @Model.NePerZinutes neperskaitytu zinuciu!</b></label><br>
+        }
     </div>
 </div>
 

@@ -5,17 +5,18 @@
 }
 <div class="text-center">
     <div class="container">
-        <h3 class="display-4">Mokinio @Model.Mokinys.Vardas @Model.Mokinys.Pavarde pažymiai</h3>
-        <table id="customers">
-            <tr>
-                <th>Įvertinimas</th>
-                <th>Priežastis</th>
-                <th>Komentaras</th>
-                <th>Atsiskaitymas</th>
-                <th></th>
-            </tr>
-            @foreach (var item in Model.Pazimiai)
-            {
+        <form method="post">
+            <h3 class="display-4">Mokinio @Model.Mokinys.Vardas @Model.Mokinys.Pavarde pažymiai</h3>
+            <table id="customers">
+                <tr>
+                    <th>Įvertinimas</th>
+                    <th>Priežastis</th>
+                    <th>Komentaras</th>
+                    <th>Atsiskaitymas</th>
+                    <th></th>
+                </tr>
+                @foreach (var item in Model.Pazimiai)
+                {
                     @foreach (var item2 in Model.Atsiskaitymai)
                     {
                         @if (item.fk_Atsiskaitymas == null)
@@ -26,7 +27,8 @@
                                 <td>@Html.DisplayFor(m => item.Komentaras)</td>
                                 <td>-</td>
                                 <td>
-                                    <a asp-page="/Mokytojas/Pazimys_Edit" asp-route-ID="@item.Id_Pazimys @Model.ID" class="button1">Redaguoti</a>
+                                    <a asp-page="/Mokytojas/Pazimys_Edit" asp-route-ID="@item.Id_Pazimys @Model.ID" class="btn btn-success btn-sm text-white">Redaguoti</a>
+                                    <button asp-page-handler="Delete" asp-route-id="@item.Id_Pazimys @Model.ID" onclick="return confirm('Ar tikrai norite pasalinti si pazymi ?')" class="btn btn-danger btn-sm text-white">Pašalinti</button>
                                 </td>
                             </tr>
                             break;
@@ -40,13 +42,15 @@
                                 <td>@Html.DisplayFor(m => item2.Tema)</td>
 
                                 <td>
-                                    <a asp-page="/Mokytojas/Pazimys_Edit" asp-route-ID="@item.Id_Pazimys @Model.ID" class="button1">Redaguoti</a>
+                                    <a asp-page="/Mokytojas/Pazimys_Edit" asp-route-ID="@item.Id_Pazimys @Model.ID" class="btn btn-success btn-sm text-white">Redaguoti</a>
+                                    <button asp-page-handler="Delete" asp-route-id="@item.Id_Pazimys @Model.ID" onclick="return confirm('Ar tikrai norite pasalinti si pazymi ?')" class="btn btn-danger btn-sm text-white">Pašalinti</button>
                                 </td>
                             </tr>
                         }
                     }
-            }
-        </table>
+                }
+            </table>
+        </form>
     </div>
     <hr>
     <h3 class="display-4">Įrašyti naują pažymį</h3>
